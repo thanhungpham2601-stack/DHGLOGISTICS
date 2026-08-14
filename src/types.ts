@@ -67,3 +67,11 @@ export interface RouteSurveyItem {
   icon: string;
   criticalPoints: string[];
 }
+
+export interface MenuItemRow {
+  id: string;
+  label: string;
+  href: string;
+  sort_order: number;
+  is_active: boolean;
+}
