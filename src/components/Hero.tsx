@@ -80,17 +80,17 @@ export function Hero({ onOpenQuote, onOpenSurvey }: HeroProps) {
   const slide = HERO_SLIDES[currentSlide];
 
   return (
-    <section id="hero" className="relative min-h-[92vh] flex items-center pt-24 pb-12 overflow-hidden bg-[#070e0b]">
+    <section id="hero" className="relative min-h-[92vh] flex items-center pt-24 pb-12 overflow-hidden bg-[#f5f8f6]">
       {/* Background Graphic & Texture */}
       <div className="absolute inset-0 bg-grid-pattern opacity-20 pointer-events-none" />
-      
-      {/* Dynamic Background Image with sophisticated cinematic gradient masks */}
+
+      {/* Dynamic Background Image with a light scrim so headline copy stays legible */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         {HERO_SLIDES.map((s, idx) => (
           <div
             key={s.id}
             className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-              idx === currentSlide ? 'opacity-40 scale-100' : 'opacity-0 scale-105 pointer-events-none'
+              idx === currentSlide ? 'opacity-100 scale-100' : 'opacity-0 scale-105 pointer-events-none'
             }`}
             style={{
               backgroundImage: `url('${s.bgImage}')`,
@@ -100,34 +100,34 @@ export function Hero({ onOpenQuote, onOpenSurvey }: HeroProps) {
             }}
           />
         ))}
-        {/* Gradients to match the exact dark green-black styling */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#070e0b] via-[#070e0b]/85 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#070e0b] via-transparent to-[#070e0b]/60" />
+        {/* Light scrim: keeps text readable on the left, lets the photo show through on the right */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/45 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-white/55 via-transparent to-white/15" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          
-          {/* Left Column: Main Typography & CTAs (Exact match to screenshot) */}
+
+          {/* Left Column: Main Typography & CTAs */}
           <div className="lg:col-span-7 flex flex-col items-start space-y-6">
-            
+
             {/* Slogan Pill */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md bg-[#13241b]/90 border border-[#234232] text-xs font-semibold text-[#8de068] tracking-widest uppercase">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md bg-white/90 border border-[#dde5e1] text-xs font-semibold text-[#1f6b12] tracking-widest uppercase shadow-sm">
               <span className="w-2 h-2 rounded-full bg-[#5cb83a] animate-pulse" />
               <span>{slide.tag}</span>
             </div>
 
-            {/* Giant Heading matching screenshot */}
+            {/* Giant Heading */}
             <div className="space-y-1">
-              <h1 className="text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight text-white font-heading leading-[0.95]">
+              <h1 className="text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight text-slate-900 font-heading leading-[0.95] drop-shadow-[0_2px_6px_rgba(255,255,255,0.85)]">
                 <div>{slide.titleLine1}</div>
-                <div className="text-[#5cb83a] drop-shadow-sm">{slide.titleLine2}</div>
-                <div className="text-[#5cb83a] drop-shadow-sm">{slide.titleLine3}</div>
+                <div className="text-[#1f6b12]">{slide.titleLine2}</div>
+                <div className="text-[#1f6b12]">{slide.titleLine3}</div>
               </h1>
             </div>
 
-            {/* Subtitle tag from screenshot: ENGINEERING • LOGISTICS • HEAVY HAUL */}
-            <div className="flex items-center gap-2 text-xs sm:text-sm font-bold text-slate-300 tracking-widest font-mono">
+            {/* Subtitle tag: ENGINEERING • LOGISTICS • HEAVY HAUL */}
+            <div className="flex items-center gap-2 text-xs sm:text-sm font-bold text-slate-900 tracking-widest font-mono drop-shadow-[0_1px_4px_rgba(255,255,255,0.9)]">
               <span>ENGINEERING</span>
               <span className="text-[#5cb83a]">•</span>
               <span>LOGISTICS</span>
@@ -136,26 +136,26 @@ export function Hero({ onOpenQuote, onOpenSurvey }: HeroProps) {
             </div>
 
             {/* Short Paragraph description */}
-            <p className="text-base sm:text-lg text-slate-300 max-w-xl font-normal leading-relaxed">
+            <p className="inline-block text-base sm:text-lg text-slate-900 max-w-xl font-semibold leading-relaxed bg-white/85 backdrop-blur-sm px-3.5 py-2.5 rounded-lg border border-[#dde5e1] shadow-sm">
               {slide.desc}
             </p>
 
             {/* Feature Pills from PDF */}
             <div className="grid grid-cols-2 gap-2 w-full max-w-lg pt-1">
               {slide.highlights.map((item, i) => (
-                <div key={i} className="flex items-center gap-2 text-xs sm:text-sm text-slate-300 bg-[#0f1d16]/70 px-2.5 py-1.5 rounded border border-[#1d3528]">
+                <div key={i} className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-800 bg-white/95 px-2.5 py-1.5 rounded border border-[#dde5e1] shadow-sm">
                   <CheckCircle className="w-3.5 h-3.5 text-[#5cb83a] shrink-0" />
                   <span className="truncate">{item}</span>
                 </div>
               ))}
             </div>
 
-            {/* Action Buttons matching screenshot */}
+            {/* Action Buttons */}
             <div className="flex flex-wrap items-center gap-4 pt-3">
               <button
                 onClick={onOpenSurvey}
                 id="hero-survey-btn"
-                className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-lg bg-[#5cb83a] hover:bg-[#6dd144] text-[#070e0b] font-extrabold text-sm tracking-wider uppercase transition-all duration-200 shadow-xl shadow-[#5cb83a]/30 hover:shadow-[#5cb83a]/50 hover:-translate-y-0.5 cursor-pointer"
+                className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-lg bg-[#5cb83a] hover:bg-[#6dd144] text-[#09110e] font-extrabold text-sm tracking-wider uppercase transition-all duration-200 shadow-xl shadow-[#5cb83a]/30 hover:shadow-[#5cb83a]/50 hover:-translate-y-0.5 cursor-pointer"
               >
                 <span>KHẢO SÁT DỰ ÁN</span>
                 <ArrowRight className="w-4 h-4" />
@@ -164,7 +164,7 @@ export function Hero({ onOpenQuote, onOpenSurvey }: HeroProps) {
               <a
                 href="#projects"
                 id="hero-view-projects-btn"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-[#122018]/90 hover:bg-[#1a2d22] text-white font-bold text-sm tracking-wider uppercase border border-[#274435] hover:border-[#5cb83a]/60 transition-all duration-200 cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-white/90 hover:bg-white text-slate-900 font-bold text-sm tracking-wider uppercase border border-[#dde5e1] hover:border-[#5cb83a]/60 transition-all duration-200 cursor-pointer shadow-sm"
               >
                 <span>XEM DỰ ÁN</span>
               </a>
@@ -172,7 +172,7 @@ export function Hero({ onOpenQuote, onOpenSurvey }: HeroProps) {
               <button
                 onClick={onOpenQuote}
                 id="hero-quote-btn"
-                className="text-xs font-semibold text-slate-300 hover:text-[#83e05e] underline underline-offset-4 ml-2"
+                className="text-xs font-semibold text-slate-700 hover:text-[#1f6b12] underline underline-offset-4 ml-2"
               >
                 Nhận báo giá nhanh trong 15 phút →
               </button>
@@ -182,24 +182,24 @@ export function Hero({ onOpenQuote, onOpenSurvey }: HeroProps) {
 
           {/* Right Column: Visual Showcase & Floating Metrics */}
           <div className="lg:col-span-5 relative flex flex-col justify-between items-end h-full">
-            
-            {/* Top Floating Badge (Exact match to "2M+ KM AN TOÀN TRÊN MỌI CUNG ĐƯỜNG" in screenshot) */}
-            <div className="w-full sm:w-auto self-end bg-[#13221b]/95 backdrop-blur-md border border-[#284938] rounded-xl p-5 shadow-2xl mb-8 relative group hover:border-[#5cb83a] transition-all">
+
+            {/* Top Floating Badge */}
+            <div className="w-full sm:w-auto self-end bg-white/95 backdrop-blur-md border border-[#dde5e1] rounded-xl p-5 shadow-xl mb-8 relative group hover:border-[#5cb83a] transition-all">
               <div className="flex items-start gap-4">
-                <div className="p-3 bg-[#5cb83a]/15 rounded-lg border border-[#5cb83a]/30 text-[#83e05e]">
+                <div className="p-3 bg-[#5cb83a]/15 rounded-lg border border-[#5cb83a]/30 text-[#1f6b12]">
                   <ShieldCheck className="w-7 h-7" />
                 </div>
                 <div>
-                  <div className="text-3xl sm:text-4xl font-black text-white font-heading tracking-tight flex items-baseline gap-1">
+                  <div className="text-3xl sm:text-4xl font-black text-slate-900 font-heading tracking-tight flex items-baseline gap-1">
                     <span>{slide.cargoBadge.split(' ')[0]}</span>
-                    <span className="text-xs font-bold text-[#83e05e] uppercase tracking-wider font-mono">
+                    <span className="text-xs font-bold text-[#1f6b12] uppercase tracking-wider font-mono">
                       CHỨNG NHẬN
                     </span>
                   </div>
-                  <div className="text-xs font-extrabold text-slate-200 uppercase tracking-wide mt-0.5">
+                  <div className="text-xs font-extrabold text-slate-700 uppercase tracking-wide mt-0.5">
                     {slide.cargoBadge.substring(slide.cargoBadge.indexOf(' ') + 1)}
                   </div>
-                  <div className="text-[11px] text-slate-400 mt-1">
+                  <div className="text-[11px] text-slate-500 mt-1">
                     {slide.cargoSub}
                   </div>
                 </div>
@@ -207,20 +207,20 @@ export function Hero({ onOpenQuote, onOpenSurvey }: HeroProps) {
             </div>
 
             {/* Truck Preview Card */}
-            <div className="w-full bg-gradient-to-t from-[#0d1813] to-[#122019] border border-[#223d2f] rounded-xl p-4 shadow-xl">
-              <div className="flex items-center justify-between text-xs text-slate-400 pb-2 border-b border-[#1c3226]">
-                <span className="flex items-center gap-1.5 font-mono text-[#83e05e]">
+            <div className="w-full bg-white border border-[#dde5e1] rounded-xl p-4 shadow-lg">
+              <div className="flex items-center justify-between text-xs text-slate-500 pb-2 border-b border-[#e2eae6]">
+                <span className="flex items-center gap-1.5 font-mono text-[#1f6b12]">
                   <span className="w-2 h-2 rounded-full bg-[#5cb83a] animate-ping"></span>
                   PHƯƠNG TIỆN DHG HEAVY HAUL
                 </span>
-                <span className="text-[11px] font-mono text-slate-400 bg-[#16291f] px-2 py-0.5 rounded border border-[#254232]">
+                <span className="text-[11px] font-mono text-slate-500 bg-[#eef3f1] px-2 py-0.5 rounded border border-[#dde5e1]">
                   BANNER 0{currentSlide + 1} / 04
                 </span>
               </div>
               <div className="mt-3 flex items-center justify-between gap-4">
                 <div className="space-y-1">
-                  <p className="text-[11px] text-slate-400 font-mono uppercase">Cấu hình đoàn xe DHG</p>
-                  <p className="text-xs sm:text-sm font-bold text-white flex items-center gap-1.5">
+                  <p className="text-[11px] text-slate-500 font-mono uppercase">Cấu hình đoàn xe DHG</p>
+                  <p className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
                     <Truck className="w-4 h-4 text-[#5cb83a] shrink-0" />
                     <span className="truncate">{slide.truckModel}</span>
                   </p>
@@ -235,7 +235,7 @@ export function Hero({ onOpenQuote, onOpenSurvey }: HeroProps) {
             </div>
 
             {/* Slide Pagination & Navigation 01 / 04 */}
-            <div className="flex items-center justify-between w-full mt-6 pt-4 border-t border-[#1a2f24]">
+            <div className="flex items-center justify-between w-full mt-6 pt-4 border-t border-[#e2eae6]">
               {/* Slide Counter */}
               <div className="flex items-center gap-3">
                 <div className="flex gap-1.5">
@@ -244,14 +244,14 @@ export function Hero({ onOpenQuote, onOpenSurvey }: HeroProps) {
                       key={i}
                       onClick={() => setCurrentSlide(i)}
                       className={`h-2 rounded-full transition-all duration-300 ${
-                        i === currentSlide ? 'w-8 bg-[#5cb83a]' : 'w-2 bg-[#253f31] hover:bg-[#345844]'
+                        i === currentSlide ? 'w-8 bg-[#5cb83a]' : 'w-2 bg-[#d8e2dd] hover:bg-[#b7cdbc]'
                       }`}
                       aria-label={`Go to slide ${i + 1}`}
                     />
                   ))}
                 </div>
-                <span className="text-sm font-bold font-mono text-slate-300">
-                  <span className="text-[#83e05e]">0{currentSlide + 1}</span>
+                <span className="text-sm font-bold font-mono text-slate-700">
+                  <span className="text-[#1f6b12]">0{currentSlide + 1}</span>
                   <span className="text-slate-500"> / 0{HERO_SLIDES.length}</span>
                 </span>
               </div>
@@ -260,14 +260,14 @@ export function Hero({ onOpenQuote, onOpenSurvey }: HeroProps) {
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setCurrentSlide((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length)}
-                  className="p-2 rounded-lg bg-[#111f18] hover:bg-[#1a2f24] text-slate-300 hover:text-white border border-[#243d31] transition-colors"
+                  className="p-2 rounded-lg bg-white hover:bg-[#eef3f1] text-slate-600 hover:text-slate-900 border border-[#dde5e1] transition-colors"
                   aria-label="Previous slide"
                 >
                   <ChevronLeft className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length)}
-                  className="p-2 rounded-lg bg-[#111f18] hover:bg-[#1a2f24] text-slate-300 hover:text-white border border-[#243d31] transition-colors"
+                  className="p-2 rounded-lg bg-white hover:bg-[#eef3f1] text-slate-600 hover:text-slate-900 border border-[#dde5e1] transition-colors"
                   aria-label="Next slide"
                 >
                   <ChevronRight className="w-4 h-4" />
@@ -280,15 +280,15 @@ export function Hero({ onOpenQuote, onOpenSurvey }: HeroProps) {
         </div>
 
         {/* 4 Interactive Banner Thumbnails Bar */}
-        <div className="mt-12 pt-8 border-t border-[#182a20]">
+        <div className="mt-12 pt-8 border-t border-[#e2eae6]">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-[#5cb83a]" />
-              <span className="text-xs font-mono font-bold text-white tracking-widest uppercase">
+              <span className="text-xs font-mono font-bold text-slate-900 tracking-widest uppercase">
                 4 HÌNH ẢNH BANNER ĐỘI XE SIÊU TRƯỜNG SIÊU TRỌNG DHG
               </span>
             </div>
-            <span className="text-[11px] text-slate-400 hidden sm:inline font-mono">
+            <span className="text-[11px] text-slate-500 hidden sm:inline font-mono">
               Nhấn vào từng banner để chuyển góc nhìn & xem cấu hình
             </span>
           </div>
@@ -300,12 +300,12 @@ export function Hero({ onOpenQuote, onOpenSurvey }: HeroProps) {
                 onClick={() => setCurrentSlide(idx)}
                 className={`relative group text-left rounded-xl overflow-hidden border transition-all duration-300 p-2 sm:p-2.5 flex flex-col justify-between ${
                   currentSlide === idx
-                    ? 'bg-[#152a1e] border-[#5cb83a] shadow-lg shadow-[#5cb83a]/20 scale-[1.02]'
-                    : 'bg-[#0d1712]/90 border-[#1d3326] hover:border-[#38634c] hover:bg-[#111f18]'
+                    ? 'bg-white border-[#5cb83a] shadow-lg shadow-[#5cb83a]/20 scale-[1.02]'
+                    : 'bg-white/90 border-[#dde5e1] hover:border-[#a9c2b0] hover:bg-[#f5f8f6]'
                 }`}
               >
                 {/* Thumbnail Image */}
-                <div className="relative w-full aspect-video rounded-lg overflow-hidden mb-2 bg-[#09110e]">
+                <div className="relative w-full aspect-video rounded-lg overflow-hidden mb-2 bg-[#eef3f1]">
                   <img
                     src={item.bgImage}
                     alt={item.titleLine2}
@@ -313,7 +313,7 @@ export function Hero({ onOpenQuote, onOpenSurvey }: HeroProps) {
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                  
+
                   {/* DHG Logo Badge */}
                   <div className="absolute top-1.5 left-1.5 px-1.5 py-0.5 rounded bg-[#09110e]/80 border border-[#5cb83a]/60 text-[9px] font-mono font-black text-[#83e05e]">
                     DHG HEAVY HAUL
@@ -327,18 +327,18 @@ export function Hero({ onOpenQuote, onOpenSurvey }: HeroProps) {
                 {/* Banner Caption */}
                 <div>
                   <p className={`text-[11px] font-bold uppercase truncate transition-colors ${
-                    currentSlide === idx ? 'text-[#83e05e]' : 'text-slate-200 group-hover:text-white'
+                    currentSlide === idx ? 'text-[#1f6b12]' : 'text-slate-700 group-hover:text-slate-900'
                   }`}>
                     {item.titleLine2}
                   </p>
-                  <p className="text-[10px] text-slate-400 truncate mt-0.5">
+                  <p className="text-[10px] text-slate-500 truncate mt-0.5">
                     {item.titleLine3} • {item.cargoBadge.split(' ')[0]}
                   </p>
                 </div>
 
                 {/* Active Indicator Bar */}
                 <div className={`mt-2 h-1 rounded-full w-full transition-all duration-300 ${
-                  currentSlide === idx ? 'bg-[#5cb83a]' : 'bg-[#1a3024]'
+                  currentSlide === idx ? 'bg-[#5cb83a]' : 'bg-[#e2eae6]'
                 }`} />
               </button>
             ))}

@@ -20,18 +20,18 @@ export function ProcessSection() {
   };
 
   return (
-    <section id="process" className="relative py-20 bg-[#060c09] border-b border-[#182a20]">
+    <section id="process" className="relative py-20 bg-[#f0f5f2] border-b border-[#e1e9e5]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <div className="inline-flex items-center gap-2 text-xs font-bold text-[#83e05e] tracking-widest uppercase font-mono bg-[#112018] px-3.5 py-1.5 rounded-full border border-[#203a2c]">
+          <div className="inline-flex items-center gap-2 text-xs font-bold text-[#1f6b12] tracking-widest uppercase font-mono bg-[#e6edea] px-3.5 py-1.5 rounded-full border border-[#d9e4de]">
             <span>QUY TRÌNH VẬN CHUYỂN TRỌN GÓI</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase text-white font-heading tracking-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase text-slate-900 font-heading tracking-tight">
             MỘT ĐẦU MỐI – TOÀN BỘ GIẢI PHÁP
           </h2>
-          <p className="text-sm sm:text-base text-slate-300">
+          <p className="text-sm sm:text-base text-slate-700">
             Chúng tôi cung cấp giải pháp vận chuyển từ khâu chuẩn bị, cấp phép lưu hành đến khi thiết bị được bàn giao an toàn tại bệ móng điểm đến.
           </p>
         </div>
@@ -46,15 +46,15 @@ export function ProcessSection() {
                 onClick={() => setSelectedStep(idx)}
                 className={`relative p-3.5 rounded-xl text-left transition-all duration-200 border flex flex-col justify-between cursor-pointer ${
                   isSelected
-                    ? 'bg-[#152a1e] border-[#5cb83a] text-white shadow-xl shadow-[#5cb83a]/20 scale-105 z-10'
-                    : 'bg-[#0d1712] border-[#1b3024] text-slate-400 hover:text-slate-200 hover:border-[#2a4d3a]'
+                    ? 'bg-[#e1ebe5] border-[#5cb83a] text-slate-900 shadow-xl shadow-[#1f6b12]/20 scale-105 z-10'
+                    : 'bg-[#ebf0ed] border-[#dee7e2] text-slate-500 hover:text-slate-800 hover:border-[#d0ddd6]'
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-xs font-bold text-[#83e05e]">
+                  <span className="font-mono text-xs font-bold text-[#1f6b12]">
                     {step.step}
                   </span>
-                  <div className={`p-1 rounded-md ${isSelected ? 'text-[#83e05e]' : 'text-slate-500'}`}>
+                  <div className={`p-1 rounded-md ${isSelected ? 'text-[#1f6b12]' : 'text-slate-500'}`}>
                     {getStepIcon(step.icon)}
                   </div>
                 </div>
@@ -76,25 +76,25 @@ export function ProcessSection() {
         </div>
 
         {/* Selected Step Detail Panel */}
-        <div className="bg-[#0e1914] rounded-2xl border border-[#233f30] p-6 sm:p-8 shadow-2xl">
+        <div className="bg-[#eaefed] rounded-2xl border border-[#d7e2dc] p-6 sm:p-8 shadow-2xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
-            <div className="lg:col-span-4 space-y-4 border-b lg:border-b-0 lg:border-r border-[#1e3629] pb-6 lg:pb-0 lg:pr-8">
+            <div className="lg:col-span-4 space-y-4 border-b lg:border-b-0 lg:border-r border-[#dbe5e0] pb-6 lg:pb-0 lg:pr-8">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-xl bg-[#172c20] border border-[#2b4d3a] flex items-center justify-center text-[#83e05e]">
+                <div className="w-12 h-12 rounded-xl bg-[#e0e9e4] border border-[#d0ddd6] flex items-center justify-center text-[#1f6b12]">
                   {getStepIcon(PROCESS_STEPS[selectedStep].icon)}
                 </div>
                 <div>
-                  <span className="text-xs font-mono font-bold text-[#83e05e]">
+                  <span className="text-xs font-mono font-bold text-[#1f6b12]">
                     BƯỚC {PROCESS_STEPS[selectedStep].step} TRÊN 08
                   </span>
-                  <h3 className="text-2xl font-black text-white font-heading uppercase">
+                  <h3 className="text-2xl font-black text-slate-900 font-heading uppercase">
                     {PROCESS_STEPS[selectedStep].title}
                   </h3>
                 </div>
               </div>
 
-              <p className="text-sm text-slate-300 leading-relaxed">
+              <p className="text-sm text-slate-700 leading-relaxed">
                 {PROCESS_STEPS[selectedStep].desc}
               </p>
 
@@ -102,7 +102,7 @@ export function ProcessSection() {
                 <button
                   disabled={selectedStep === 0}
                   onClick={() => setSelectedStep(prev => Math.max(0, prev - 1))}
-                  className="px-3.5 py-1.5 rounded-lg bg-[#14231b] hover:bg-[#1a2e23] disabled:opacity-30 text-xs font-semibold text-slate-300 border border-[#213a2d]"
+                  className="px-3.5 py-1.5 rounded-lg bg-[#e5ece8] hover:bg-[#dfe8e3] disabled:opacity-30 text-xs font-semibold text-slate-700 border border-[#d9e3de]"
                 >
                   ← Bước trước
                 </button>
@@ -117,7 +117,7 @@ export function ProcessSection() {
             </div>
 
             <div className="lg:col-span-8 space-y-3">
-              <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider font-mono">
+              <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider font-mono">
                 Nhiệm vụ & Tiêu Chuẩn Thực Hiện Chi Tiết:
               </h4>
 
@@ -125,18 +125,18 @@ export function ProcessSection() {
                 {PROCESS_STEPS[selectedStep].details.map((detail, idx) => (
                   <div
                     key={idx}
-                    className="p-4 rounded-xl bg-[#13221b] border border-[#1e372a] space-y-2 flex flex-col justify-between"
+                    className="p-4 rounded-xl bg-[#e5ece9] border border-[#dbe5e0] space-y-2 flex flex-col justify-between"
                   >
                     <div className="flex items-center gap-2">
-                      <div className="w-5 h-5 rounded-full bg-[#1b3325] text-[#83e05e] font-mono text-[10px] font-bold flex items-center justify-center shrink-0">
+                      <div className="w-5 h-5 rounded-full bg-[#dde7e1] text-[#1f6b12] font-mono text-[10px] font-bold flex items-center justify-center shrink-0">
                         0{idx + 1}
                       </div>
-                      <span className="text-xs font-bold text-slate-200">Hạng mục {idx + 1}</span>
+                      <span className="text-xs font-bold text-slate-800">Hạng mục {idx + 1}</span>
                     </div>
-                    <p className="text-xs text-slate-300 leading-relaxed">
+                    <p className="text-xs text-slate-700 leading-relaxed">
                       {detail}
                     </p>
-                    <div className="text-[10px] text-[#83e05e] font-mono flex items-center gap-1 pt-1">
+                    <div className="text-[10px] text-[#1f6b12] font-mono flex items-center gap-1 pt-1">
                       <Check className="w-3 h-3" />
                       <span>Đảm bảo 100% chuẩn</span>
                     </div>

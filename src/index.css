@@ -6,14 +6,14 @@
     --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     --color-brand-green: #5cb83a;
     --color-brand-green-hover: #6dd144;
-    --color-brand-dark: #0a110f;
-    --color-brand-surface: #121c17;
+    --color-brand-dark: #101a14;
+    --color-brand-surface: #f2f6f2;
   }
 
   body {
     font-family: var(--font-sans);
-    background-color: #0b1310;
-    color: #f1f5f9;
+    background-color: #f7faf7;
+    color: #101a14;
     overflow-x: hidden;
   }
 
@@ -29,10 +29,10 @@
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #0a110f;
+  background: #eef2ef;
 }
 ::-webkit-scrollbar-thumb {
-  background: #233a30;
+  background: #b7cdbc;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
@@ -51,7 +51,7 @@
 
 .bg-grid-pattern {
   background-size: 40px 40px;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-image:
+    linear-gradient(to right, rgba(16, 26, 20, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(16, 26, 20, 0.05) 1px, transparent 1px);
 }

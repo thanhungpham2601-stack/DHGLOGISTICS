@@ -33,7 +33,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#070e0b] text-slate-100 selection:bg-[#5cb83a] selection:text-[#09110e]">
+    <div className="min-h-screen bg-[#eff4f2] text-slate-900 selection:bg-[#5cb83a] selection:text-[#09110e]">
       {/* Top Fixed Navbar */}
       <Navbar
         onOpenQuote={scrollToQuote}
@@ -99,7 +99,7 @@ export default function App() {
         <button
           onClick={scrollToQuote}
           id="floating-quote-btn"
-          className="flex items-center gap-2 px-4 py-3 rounded-full bg-[#5cb83a] hover:bg-[#6dd144] text-[#09110e] font-extrabold text-xs shadow-2xl shadow-[#5cb83a]/40 hover:scale-105 transition-all cursor-pointer border border-[#85e261]"
+          className="flex items-center gap-2 px-4 py-3 rounded-full bg-[#5cb83a] hover:bg-[#6dd144] text-[#09110e] font-extrabold text-xs shadow-2xl shadow-[#1f6b12]/40 hover:scale-105 transition-all cursor-pointer border border-[#85e261]"
           title="Yêu cầu báo giá nhanh"
         >
           <FileText className="w-4 h-4" />
@@ -110,7 +110,7 @@ export default function App() {
         <a
           href={`tel:${COMPANY_INFO.hotline}`}
           id="floating-phone-btn"
-          className="flex items-center justify-center w-12 h-12 rounded-full bg-[#14261d] hover:bg-[#1a3327] text-[#5cb83a] border border-[#2b4d3a] shadow-xl hover:scale-110 transition-all"
+          className="flex items-center justify-center w-12 h-12 rounded-full bg-[#e3ebe7] hover:bg-[#dde7e2] text-[#1f6b12] border border-[#d0ddd6] shadow-xl hover:scale-110 transition-all"
           title={`Gọi ngay ${COMPANY_INFO.hotlineFormatted}`}
         >
           <Phone className="w-5 h-5" />
@@ -120,7 +120,7 @@ export default function App() {
         <button
           onClick={scrollToTop}
           id="floating-scroll-top-btn"
-          className="flex items-center justify-center w-10 h-10 rounded-full bg-[#0c1612] hover:bg-[#15241d] text-slate-400 hover:text-white border border-[#1f372a] shadow-lg transition-all"
+          className="flex items-center justify-center w-10 h-10 rounded-full bg-[#ebf1ef] hover:bg-[#e4ebe8] text-slate-500 hover:text-slate-900 border border-[#dbe5df] shadow-lg transition-all"
           title="Lên đầu trang"
         >
           <ArrowUp className="w-4 h-4" />
