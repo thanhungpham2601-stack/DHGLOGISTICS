@@ -1,0 +1,6 @@
+{
+  "name": "DHG Heavy Haul",
+  "description": "Website dịch vụ vận chuyển hàng quá khổ, siêu trường siêu trọng DHG - Giải pháp vận chuyển trọn gói an toàn toàn quốc.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
