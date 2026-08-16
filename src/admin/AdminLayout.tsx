@@ -1,5 +1,5 @@
 import { Link, Navigate, Outlet, useLocation } from 'react-router-dom';
-import { LogOut, ListTree } from 'lucide-react';
+import { LogOut, ListTree, FolderKanban } from 'lucide-react';
 import { useAuth } from '../lib/AuthContext';
 
 export function AdminLayout() {
@@ -18,7 +18,7 @@ export function AdminLayout() {
     return <Navigate to="/admin/login" replace state={{ from: location }} />;
   }
 
-  if (!hasPermission('menu.manage')) {
+  if (!hasPermission('menu.manage') && !hasPermission('projects.manage')) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#eff4f2] text-slate-700 text-sm px-4 text-center">
         Tài khoản {profile?.email ?? ''} chưa được cấp quyền truy cập trang quản trị.
@@ -42,13 +42,24 @@ export function AdminLayout() {
         </div>
 
         <nav className="flex-1 space-y-1">
-          <Link
-            to="/admin/menu"
-            className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold text-slate-800 hover:bg-[#e5ece8]"
-          >
-            <ListTree className="w-4 h-4 text-[#1f6b12]" />
-            Quản lý Menu
-          </Link>
+          {hasPermission('menu.manage') && (
+            <Link
+              to="/admin/menu"
+              className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold text-slate-800 hover:bg-[#e5ece8]"
+            >
+              <ListTree className="w-4 h-4 text-[#1f6b12]" />
+              Quản lý Menu
+            </Link>
+          )}
+          {hasPermission('projects.manage') && (
+            <Link
+              to="/admin/projects"
+              className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold text-slate-800 hover:bg-[#e5ece8]"
+            >
+              <FolderKanban className="w-4 h-4 text-[#1f6b12]" />
+              Quản lý Dự án
+            </Link>
+          )}
         </nav>
 
         <button

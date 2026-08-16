@@ -1,4 +1,4 @@
-import { ServiceItem, VehicleSpec, ProcessStep, ProjectCase, RouteSurveyItem } from '../types';
+import { ServiceItem, VehicleSpec, ProcessStep, RouteSurveyItem } from '../types';
 
 import bannerWindBlade from '../assets/images/dhg_heavy_haul_wind_blade_1786671304592.jpg';
 import bannerTransformer from '../assets/images/dhg_heavy_haul_transformer_1786671321288.jpg';
@@ -396,49 +396,5 @@ export const WHY_CHOOSE_US = [
   }
 ];
 
-export const PROJECT_CASES: ProjectCase[] = [
-  {
-    id: "du-an-dien-gio",
-    title: "Vận Chuyển Cánh Quạt & Trụ Điện Gió 82m",
-    clientType: "Dự Án Năng Lượng Tái Tạo",
-    cargo: "Cánh quạt điện gió dài 78m - 82m, Trụ tháp nặng 95 tấn",
-    weight: "95 Tấn / kiện",
-    dimension: "Dài 82.5m × Rộng 4.2m × Cao 4.5m",
-    route: "Cảng Cam Ranh → Dự án Điện gió Đắk Lắk",
-    image: bannerWindBlade,
-    highlight: "Vượt qua hơn 240km đường đèo dốc hiểm trở với xe mooc rút kéo dài có hệ thống bẻ lái trục sau tự động."
-  },
-  {
-    id: "du-an-bon-loc-dau",
-    title: "Vận Chuyển Tháp Chưng Cất & Bồn Áp Lực 140 Tấn",
-    clientType: "Dự Án Lọc Hóa Dầu",
-    cargo: "Tháp áp lực nguyên khối",
-    weight: "140 Tấn",
-    dimension: "Dài 34m × Đường kính Ø 5.6m",
-    route: "Cảng Dung Quất → Khu liên hợp Lọc Hóa Dầu",
-    image: bannerRefinerySilo,
-    highlight: "Sử dụng cụm mooc thủy lực 16 trục Goldhofer tự hành kết hợp 2 đầu kéo 800HP đẩy kéo an toàn tuyệt đối."
-  },
-  {
-    id: "du-an-may-bien-ap",
-    title: "Vận Chuyển Máy Biến Áp 220kV Siêu Trọng",
-    clientType: "Truyền Tải Điện Quốc Gia",
-    cargo: "Máy biến áp 220kV - 250MVA",
-    weight: "115 Tấn",
-    dimension: "Dài 7.8m × Rộng 3.8m × Cao 4.4m",
-    route: "Cảng Hải Phòng → Trạm Biến Áp 220kV Tây Bắc",
-    image: bannerTransformer,
-    highlight: "Khảo sát và nâng hạ hơn 18 điểm dây điện cao thế, thi công gia cường tạm 2 cầu yếu trên tuyến đường đèo dốc."
-  },
-  {
-    id: "du-an-may-xuc-mo",
-    title: "Điều Chuyển Máy Xúc Thủy Lực & Cẩu Bánh Xích 150T",
-    clientType: "Khai Thác Mỏ & Xây Dựng Hạ Tầng",
-    cargo: "Máy xúc gầu thuận Liebherr & Cẩu xích Kobelco",
-    weight: "85 Tấn / thiết bị",
-    dimension: "Dài 13.5m × Rộng 4.2m × Cao 4.1m",
-    route: "Mỏ Than Quảng Ninh → Dự Án Cao Tốc Bắc - Nam",
-    image: bannerExcavatorLowbed,
-    highlight: "Sử dụng mooc sàn lùn hạ đáy tháo rời cổ ngỗng giúp xe máy xúc tự hành lên xuống an toàn trong 20 phút."
-  }
-];
+// Dự án tiêu biểu giờ được quản lý qua bảng `projects` trên Supabase (xem AdminProjectsPage
+// / ProjectsSection) thay vì hardcode ở đây, để tránh số liệu bịa đặt hiển thị công khai.

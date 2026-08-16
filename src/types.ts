@@ -42,6 +42,10 @@ export interface ProjectCase {
   route: string;
   image: string;
   highlight: string;
+  /** CSS object-position for the card thumbnail; defaults to 'center' when omitted */
+  imagePosition?: string;
+  /** Extra photos shown as a gallery inside the detail modal */
+  gallery?: string[];
 }
 
 export interface QuoteFormData {
