@@ -7,6 +7,7 @@ import {AdminLoginPage} from './admin/AdminLoginPage';
 import {AdminLayout} from './admin/AdminLayout';
 import {AdminMenuPage} from './admin/AdminMenuPage';
 import {AdminProjectsPage} from './admin/AdminProjectsPage';
+import {AdminQuotesPage} from './admin/AdminQuotesPage';
 import './index.css';
 
 createRoot(document.getElementById('root')!).render(
@@ -20,6 +21,7 @@ createRoot(document.getElementById('root')!).render(
             <Route index element={<AdminMenuPage />} />
             <Route path="menu" element={<AdminMenuPage />} />
             <Route path="projects" element={<AdminProjectsPage />} />
+            <Route path="quotes" element={<AdminQuotesPage />} />
           </Route>
         </Routes>
       </AuthProvider>

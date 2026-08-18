@@ -1,7 +1,8 @@
 import { useState, FormEvent, ChangeEvent } from 'react';
-import { Send, CheckCircle2, Phone, Mail, Upload, AlertCircle, Calculator, FileText, Truck, ArrowRight } from 'lucide-react';
+import { Send, CheckCircle2, Phone, Mail, Upload, AlertCircle, Calculator, FileText, Truck, ArrowRight, Loader2 } from 'lucide-react';
 import { COMPANY_INFO } from '../data/companyData';
 import { QuoteFormData } from '../types';
+import { supabase } from '../lib/supabaseClient';
 
 export function QuoteSection() {
   const [formData, setFormData] = useState<QuoteFormData>({
@@ -24,6 +25,9 @@ export function QuoteSection() {
   const [submitted, setSubmitted] = useState(false);
   const [refCode, setRefCode] = useState('');
   const [fileAttached, setFileAttached] = useState<string | null>(null);
+  const [attachedFile, setAttachedFile] = useState<File | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   // Dynamic categorization based on inputs
   const l = parseFloat(String(formData.length)) || 0;
@@ -46,16 +50,62 @@ export function QuoteSection() {
 
   const categoryResult = getCategoryTag();
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    const generatedCode = 'DHG-' + Math.floor(100000 + Math.random() * 900000);
-    setRefCode(generatedCode);
-    setSubmitted(true);
+    setSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      let attachmentUrl: string | null = null;
+      let attachmentName: string | null = null;
+
+      if (attachedFile) {
+        const ext = attachedFile.name.split('.').pop() || 'bin';
+        const path = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+        const { error: uploadError } = await supabase.storage
+          .from('quote-attachments')
+          .upload(path, attachedFile);
+        if (uploadError) throw uploadError;
+        attachmentUrl = supabase.storage.from('quote-attachments').getPublicUrl(path).data.publicUrl;
+        attachmentName = attachedFile.name;
+      }
+
+      const generatedCode = 'DHG-' + Math.floor(100000 + Math.random() * 900000);
+
+      const { error: insertError } = await supabase.from('quote_requests').insert({
+        ref_code: generatedCode,
+        cargo_name: formData.cargoName,
+        length: l || null,
+        width: w || null,
+        height: h || null,
+        weight: wt || null,
+        quantity: parseInt(String(formData.quantity), 10) || 1,
+        pickup_location: formData.pickupLocation,
+        delivery_location: formData.deliveryLocation,
+        estimated_date: formData.estimatedDate || null,
+        special_requirements: formData.specialRequirements,
+        customer_name: formData.customerName,
+        phone_number: formData.phoneNumber,
+        email: formData.email,
+        company_name: formData.companyName,
+        attachment_url: attachmentUrl,
+        attachment_name: attachmentName,
+      });
+      if (insertError) throw insertError;
+
+      setRefCode(generatedCode);
+      setSubmitted(true);
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : 'Gửi yêu cầu thất bại, vui lòng thử lại.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setFileAttached(e.target.files[0].name);
+      setAttachedFile(e.target.files[0]);
     }
   };
 
@@ -186,6 +236,24 @@ export function QuoteSection() {
                     onClick={() => {
                       setSubmitted(false);
                       setFileAttached(null);
+                      setAttachedFile(null);
+                      setSubmitError(null);
+                      setFormData({
+                        cargoName: '',
+                        length: '',
+                        width: '',
+                        height: '',
+                        weight: '',
+                        quantity: '1',
+                        pickupLocation: '',
+                        deliveryLocation: '',
+                        estimatedDate: '',
+                        specialRequirements: '',
+                        customerName: '',
+                        phoneNumber: '',
+                        email: '',
+                        companyName: '',
+                      });
                     }}
                     className="px-5 py-3 rounded-lg bg-[#e5ece8] text-slate-700 font-semibold text-xs border border-[#d7e1dc] hover:text-slate-900"
                   >
@@ -448,14 +516,21 @@ export function QuoteSection() {
                 </div>
 
                 {/* Submit Action Button */}
-                <div className="pt-3">
+                <div className="pt-3 space-y-3">
+                  {submitError && (
+                    <div className="flex items-center gap-2 text-xs text-red-600 bg-red-50 border border-red-200 rounded-lg px-3 py-2">
+                      <AlertCircle className="w-4 h-4 shrink-0" />
+                      <span>{submitError}</span>
+                    </div>
+                  )}
                   <button
                     type="submit"
                     id="submit-quote-btn"
-                    className="w-full flex items-center justify-center gap-2 py-4 rounded-xl bg-[#5cb83a] hover:bg-[#6dd144] text-[#09110e] font-extrabold text-sm uppercase tracking-wider transition-all shadow-xl shadow-[#1f6b12]/25 hover:shadow-[#1f6b12]/40 cursor-pointer"
+                    disabled={submitting}
+                    className="w-full flex items-center justify-center gap-2 py-4 rounded-xl bg-[#5cb83a] hover:bg-[#6dd144] text-[#09110e] font-extrabold text-sm uppercase tracking-wider transition-all shadow-xl shadow-[#1f6b12]/25 hover:shadow-[#1f6b12]/40 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    <Send className="w-4 h-4" />
-                    <span>GỬI YÊU CẦU BÁO GIÁ & PHƯƠNG ÁN KỸ THUẬT</span>
+                    {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+                    <span>{submitting ? 'ĐANG GỬI...' : 'GỬI YÊU CẦU BÁO GIÁ & PHƯƠNG ÁN KỸ THUẬT'}</span>
                   </button>
                 </div>
 
