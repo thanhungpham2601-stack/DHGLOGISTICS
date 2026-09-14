@@ -126,7 +126,7 @@ export function AdminQuotesPage() {
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="px-3 py-2 rounded-lg bg-white border border-[#d8e2dd] text-xs font-semibold text-slate-700 outline-none focus:border-[#5cb83a]"
+          className="px-3 py-2 rounded-none bg-white border border-[#d8dbe2] text-xs font-semibold text-slate-700 outline-none focus:border-[#1ba8e8]"
         >
           <option value="all">Tất cả trạng thái</option>
           {STATUS_OPTIONS.map((s) => (
@@ -138,48 +138,48 @@ export function AdminQuotesPage() {
       </div>
 
       {error && (
-        <div className="mt-4 text-xs text-red-600 bg-red-50 border border-red-200 rounded-lg px-3 py-2">
+        <div className="mt-4 text-xs text-red-600 bg-red-50 border border-red-200 rounded-none px-3 py-2">
           {error}
         </div>
       )}
 
       {active && (
-        <div className="mt-6 bg-white border border-[#dbe5df] rounded-xl p-5 space-y-4">
+        <div className="mt-6 bg-white border border-[#dbdfe5] rounded-none p-5 space-y-4">
           <div className="flex items-start justify-between">
             <div>
-              <span className="text-xs font-mono font-bold text-[#1f6b12]">#{active.ref_code}</span>
+              <span className="text-xs font-mono font-bold text-[#0b6fa8]">#{active.ref_code}</span>
               <h2 className="text-lg font-bold text-slate-900">{active.cargo_name || '(Chưa đặt tên hàng hóa)'}</h2>
               <span className="text-xs text-slate-500">{formatDate(active.created_at)}</span>
             </div>
-            <button onClick={() => setActiveId(null)} className="p-1.5 rounded text-slate-500 hover:text-slate-900">
+            <button onClick={() => setActiveId(null)} className="p-1.5 rounded-none text-slate-500 hover:text-slate-900">
               <X className="w-4 h-4" />
             </button>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-            <div className="bg-[#f5f8f6] rounded-lg p-3 border border-[#e5ece8]">
+            <div className="bg-[#f5f6f8] rounded-none p-3 border border-[#e5e7ec]">
               <div className="text-[10px] font-semibold text-slate-500 uppercase mb-1">Người liên hệ</div>
               <div className="font-semibold text-slate-900">{active.customer_name}</div>
               {active.company_name && <div className="text-xs text-slate-600">{active.company_name}</div>}
               <div className="flex items-center gap-3 mt-1 text-xs">
-                <a href={`tel:${active.phone_number}`} className="flex items-center gap-1 text-[#1f6b12] font-semibold">
+                <a href={`tel:${active.phone_number}`} className="flex items-center gap-1 text-[#0b6fa8] font-semibold">
                   <Phone className="w-3 h-3" /> {active.phone_number}
                 </a>
                 {active.email && (
-                  <a href={`mailto:${active.email}`} className="flex items-center gap-1 text-[#1f6b12] font-semibold">
+                  <a href={`mailto:${active.email}`} className="flex items-center gap-1 text-[#0b6fa8] font-semibold">
                     <Mail className="w-3 h-3" /> {active.email}
                   </a>
                 )}
               </div>
             </div>
 
-            <div className="bg-[#f5f8f6] rounded-lg p-3 border border-[#e5ece8]">
+            <div className="bg-[#f5f6f8] rounded-none p-3 border border-[#e5e7ec]">
               <div className="text-[10px] font-semibold text-slate-500 uppercase mb-1">Hàng hóa</div>
               <div>Kích thước: {dimensionText(active)}</div>
               <div>Trọng lượng: {active.weight ?? '—'} tấn × {active.quantity} kiện</div>
             </div>
 
-            <div className="bg-[#f5f8f6] rounded-lg p-3 border border-[#e5ece8] sm:col-span-2">
+            <div className="bg-[#f5f6f8] rounded-none p-3 border border-[#e5e7ec] sm:col-span-2">
               <div className="text-[10px] font-semibold text-slate-500 uppercase mb-1">Hành trình</div>
               <div>Nhận: {active.pickup_location || '—'}</div>
               <div>Giao: {active.delivery_location || '—'}</div>
@@ -187,7 +187,7 @@ export function AdminQuotesPage() {
             </div>
 
             {active.special_requirements && (
-              <div className="bg-[#f5f8f6] rounded-lg p-3 border border-[#e5ece8] sm:col-span-2">
+              <div className="bg-[#f5f6f8] rounded-none p-3 border border-[#e5e7ec] sm:col-span-2">
                 <div className="text-[10px] font-semibold text-slate-500 uppercase mb-1">Yêu cầu đặc biệt</div>
                 <div>{active.special_requirements}</div>
               </div>
@@ -198,7 +198,7 @@ export function AdminQuotesPage() {
                 href={active.attachment_url}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-2 text-xs font-semibold text-[#1f6b12] sm:col-span-2"
+                className="flex items-center gap-2 text-xs font-semibold text-[#0b6fa8] sm:col-span-2"
               >
                 <Paperclip className="w-3.5 h-3.5" />
                 {active.attachment_name || 'Xem file đính kèm'}
@@ -211,8 +211,8 @@ export function AdminQuotesPage() {
               <button
                 key={s.value}
                 onClick={() => updateStatus(active.id, s.value)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
-                  active.status === s.value ? s.className : 'bg-white text-slate-500 border-[#d8e2dd] hover:border-slate-300'
+                className={`px-3 py-1.5 rounded-none text-xs font-semibold border transition-all ${
+                  active.status === s.value ? s.className : 'bg-white text-slate-500 border-[#d8dbe2] hover:border-slate-300'
                 }`}
               >
                 {s.label}
@@ -227,13 +227,13 @@ export function AdminQuotesPage() {
               onChange={(e) => setNoteDraft(e.target.value)}
               rows={3}
               placeholder="VD: đã gọi, khách cần báo giá lại vào tuần sau..."
-              className="w-full px-3 py-2 rounded-lg bg-white border border-[#d8e2dd] text-sm text-slate-900 outline-none focus:border-[#5cb83a]"
+              className="w-full px-3 py-2 rounded-none bg-white border border-[#d8dbe2] text-sm text-slate-900 outline-none focus:border-[#1ba8e8]"
             />
             <div className="flex justify-end">
               <button
                 onClick={saveNote}
                 disabled={saving}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#5cb83a] hover:bg-[#6dd144] text-[#09110e] font-bold text-xs disabled:opacity-60"
+                className="flex items-center gap-2 px-4 py-2 rounded-none bg-[#1ba8e8] hover:bg-[#3fc1ff] text-white font-bold text-xs disabled:opacity-60"
               >
                 {saving && <Loader2 className="w-4 h-4 animate-spin" />}
                 Lưu ghi chú
@@ -255,14 +255,14 @@ export function AdminQuotesPage() {
               <div
                 key={item.id}
                 onClick={() => openDetail(item)}
-                className={`flex items-center gap-3 bg-white border rounded-xl p-3 cursor-pointer transition-colors ${
-                  activeId === item.id ? 'border-[#5cb83a]' : 'border-[#dbe5df] hover:border-[#c3d2ca]'
+                className={`flex items-center gap-3 bg-white border rounded-none p-3 cursor-pointer transition-colors ${
+                  activeId === item.id ? 'border-[#1ba8e8]' : 'border-[#dbdfe5] hover:border-[#c3c7d2]'
                 }`}
               >
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono font-bold text-[#1f6b12]">#{item.ref_code}</span>
-                    <span className={`text-[10px] font-semibold px-2 py-0.5 rounded border ${meta.className}`}>
+                    <span className="text-xs font-mono font-bold text-[#0b6fa8]">#{item.ref_code}</span>
+                    <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-none border ${meta.className}`}>
                       {meta.label}
                     </span>
                   </div>
@@ -279,7 +279,7 @@ export function AdminQuotesPage() {
                     e.stopPropagation();
                     removeItem(item.id);
                   }}
-                  className="p-2 rounded-lg text-red-500 hover:bg-red-50 shrink-0"
+                  className="p-2 rounded-none text-red-500 hover:bg-red-50 shrink-0"
                   title="Xóa"
                 >
                   <Trash2 className="w-4 h-4" />

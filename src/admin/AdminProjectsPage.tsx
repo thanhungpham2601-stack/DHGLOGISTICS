@@ -219,7 +219,7 @@ export function AdminProjectsPage() {
         {editingId === null && (
           <button
             onClick={openNew}
-            className="shrink-0 flex items-center gap-2 px-4 py-2 rounded-lg bg-[#5cb83a] hover:bg-[#6dd144] text-[#09110e] font-bold text-xs"
+            className="shrink-0 flex items-center gap-2 px-4 py-2 rounded-none bg-[#1ba8e8] hover:bg-[#3fc1ff] text-white font-bold text-xs"
           >
             <Plus className="w-4 h-4" />
             Thêm dự án
@@ -228,18 +228,18 @@ export function AdminProjectsPage() {
       </div>
 
       {error && (
-        <div className="mt-4 text-xs text-red-600 bg-red-50 border border-red-200 rounded-lg px-3 py-2">
+        <div className="mt-4 text-xs text-red-600 bg-red-50 border border-red-200 rounded-none px-3 py-2">
           {error}
         </div>
       )}
 
       {editingId !== null ? (
-        <form onSubmit={submitForm} className="mt-6 bg-white border border-[#dbe5df] rounded-xl p-5 space-y-4">
+        <form onSubmit={submitForm} className="mt-6 bg-white border border-[#dbdfe5] rounded-none p-5 space-y-4">
           <div className="flex items-center justify-between">
             <h2 className="text-sm font-bold text-slate-900">
               {editingId === 'new' ? 'Dự án mới' : 'Sửa dự án'}
             </h2>
-            <button type="button" onClick={closeForm} className="p-1.5 rounded text-slate-500 hover:text-slate-900">
+            <button type="button" onClick={closeForm} className="p-1.5 rounded-none text-slate-500 hover:text-slate-900">
               <X className="w-4 h-4" />
             </button>
           </div>
@@ -251,7 +251,7 @@ export function AdminProjectsPage() {
                 value={form.title}
                 onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))}
                 required
-                className="w-full px-3 py-2 rounded-lg bg-white border border-[#d8e2dd] text-sm font-normal text-slate-900 outline-none focus:border-[#5cb83a]"
+                className="w-full px-3 py-2 rounded-none bg-white border border-[#d8dbe2] text-sm font-normal text-slate-900 outline-none focus:border-[#1ba8e8]"
               />
             </label>
             <label className="text-xs font-semibold text-slate-700 space-y-1">
@@ -259,7 +259,7 @@ export function AdminProjectsPage() {
               <input
                 value={form.client_type}
                 onChange={(e) => setForm((f) => ({ ...f, client_type: e.target.value }))}
-                className="w-full px-3 py-2 rounded-lg bg-white border border-[#d8e2dd] text-sm font-normal text-slate-900 outline-none focus:border-[#5cb83a]"
+                className="w-full px-3 py-2 rounded-none bg-white border border-[#d8dbe2] text-sm font-normal text-slate-900 outline-none focus:border-[#1ba8e8]"
               />
             </label>
             <label className="text-xs font-semibold text-slate-700 space-y-1">
@@ -267,7 +267,7 @@ export function AdminProjectsPage() {
               <input
                 value={form.cargo}
                 onChange={(e) => setForm((f) => ({ ...f, cargo: e.target.value }))}
-                className="w-full px-3 py-2 rounded-lg bg-white border border-[#d8e2dd] text-sm font-normal text-slate-900 outline-none focus:border-[#5cb83a]"
+                className="w-full px-3 py-2 rounded-none bg-white border border-[#d8dbe2] text-sm font-normal text-slate-900 outline-none focus:border-[#1ba8e8]"
               />
             </label>
             <label className="text-xs font-semibold text-slate-700 space-y-1">
@@ -275,7 +275,7 @@ export function AdminProjectsPage() {
               <input
                 value={form.weight}
                 onChange={(e) => setForm((f) => ({ ...f, weight: e.target.value }))}
-                className="w-full px-3 py-2 rounded-lg bg-white border border-[#d8e2dd] text-sm font-normal text-slate-900 outline-none focus:border-[#5cb83a]"
+                className="w-full px-3 py-2 rounded-none bg-white border border-[#d8dbe2] text-sm font-normal text-slate-900 outline-none focus:border-[#1ba8e8]"
               />
             </label>
             <label className="text-xs font-semibold text-slate-700 space-y-1">
@@ -283,7 +283,7 @@ export function AdminProjectsPage() {
               <input
                 value={form.dimension}
                 onChange={(e) => setForm((f) => ({ ...f, dimension: e.target.value }))}
-                className="w-full px-3 py-2 rounded-lg bg-white border border-[#d8e2dd] text-sm font-normal text-slate-900 outline-none focus:border-[#5cb83a]"
+                className="w-full px-3 py-2 rounded-none bg-white border border-[#d8dbe2] text-sm font-normal text-slate-900 outline-none focus:border-[#1ba8e8]"
               />
             </label>
             <label className="text-xs font-semibold text-slate-700 space-y-1">
@@ -291,7 +291,7 @@ export function AdminProjectsPage() {
               <input
                 value={form.route}
                 onChange={(e) => setForm((f) => ({ ...f, route: e.target.value }))}
-                className="w-full px-3 py-2 rounded-lg bg-white border border-[#d8e2dd] text-sm font-normal text-slate-900 outline-none focus:border-[#5cb83a]"
+                className="w-full px-3 py-2 rounded-none bg-white border border-[#d8dbe2] text-sm font-normal text-slate-900 outline-none focus:border-[#1ba8e8]"
               />
             </label>
           </div>
@@ -302,7 +302,7 @@ export function AdminProjectsPage() {
               value={form.highlight}
               onChange={(e) => setForm((f) => ({ ...f, highlight: e.target.value }))}
               rows={3}
-              className="w-full px-3 py-2 rounded-lg bg-white border border-[#d8e2dd] text-sm font-normal text-slate-900 outline-none focus:border-[#5cb83a]"
+              className="w-full px-3 py-2 rounded-none bg-white border border-[#d8dbe2] text-sm font-normal text-slate-900 outline-none focus:border-[#1ba8e8]"
             />
           </label>
 
@@ -312,7 +312,7 @@ export function AdminProjectsPage() {
               value={form.image_position}
               onChange={(e) => setForm((f) => ({ ...f, image_position: e.target.value }))}
               placeholder="center"
-              className="w-full px-3 py-2 rounded-lg bg-white border border-[#d8e2dd] text-sm font-normal text-slate-900 outline-none focus:border-[#5cb83a]"
+              className="w-full px-3 py-2 rounded-none bg-white border border-[#d8dbe2] text-sm font-normal text-slate-900 outline-none focus:border-[#1ba8e8]"
             />
           </label>
 
@@ -321,9 +321,9 @@ export function AdminProjectsPage() {
             <span className="text-xs font-semibold text-slate-700">Ảnh chính *</span>
             <div className="flex items-center gap-3">
               {form.image_url && (
-                <img src={form.image_url} alt="" className="w-20 h-16 object-cover rounded-lg border border-[#d8e2dd]" />
+                <img src={form.image_url} alt="" className="w-20 h-16 object-cover rounded-none border border-[#d8dbe2]" />
               )}
-              <label className="flex items-center gap-2 px-3 py-2 rounded-lg bg-[#e8eeec] border border-[#d8e2dd] text-xs font-semibold text-slate-700 cursor-pointer hover:bg-[#e0e8e4]">
+              <label className="flex items-center gap-2 px-3 py-2 rounded-none bg-[#e8e8ee] border border-[#d8dbe2] text-xs font-semibold text-slate-700 cursor-pointer hover:bg-[#e0e2e8]">
                 {uploadingMain ? <Loader2 className="w-4 h-4 animate-spin" /> : <ImagePlus className="w-4 h-4" />}
                 {form.image_url ? 'Đổi ảnh' : 'Chọn ảnh'}
                 <input
@@ -342,7 +342,7 @@ export function AdminProjectsPage() {
             <div className="flex flex-wrap gap-2">
               {form.gallery.map((img) => (
                 <div key={img} className="relative w-20 h-16 shrink-0">
-                  <img src={img} alt="" className="w-full h-full object-cover rounded-lg border border-[#d8e2dd]" />
+                  <img src={img} alt="" className="w-full h-full object-cover rounded-none border border-[#d8dbe2]" />
                   <button
                     type="button"
                     onClick={() => removeGalleryImage(img)}
@@ -352,7 +352,7 @@ export function AdminProjectsPage() {
                   </button>
                 </div>
               ))}
-              <label className="flex items-center justify-center w-20 h-16 rounded-lg bg-[#e8eeec] border border-dashed border-[#c7d3cc] text-slate-500 cursor-pointer hover:bg-[#e0e8e4] shrink-0">
+              <label className="flex items-center justify-center w-20 h-16 rounded-none bg-[#e8e8ee] border border-dashed border-[#c7cbd3] text-slate-500 cursor-pointer hover:bg-[#e0e2e8] shrink-0">
                 {uploadingGallery ? <Loader2 className="w-4 h-4 animate-spin" /> : <Plus className="w-4 h-4" />}
                 <input
                   type="file"
@@ -365,18 +365,18 @@ export function AdminProjectsPage() {
             </div>
           </div>
 
-          <div className="flex items-center justify-end gap-3 pt-2 border-t border-[#e5ece8]">
+          <div className="flex items-center justify-end gap-3 pt-2 border-t border-[#e5e7ec]">
             <button
               type="button"
               onClick={closeForm}
-              className="px-4 py-2 rounded-lg bg-[#e5ece8] text-slate-700 font-semibold text-xs"
+              className="px-4 py-2 rounded-none bg-[#e5e7ec] text-slate-700 font-semibold text-xs"
             >
               Hủy
             </button>
             <button
               type="submit"
               disabled={saving || uploadingMain || uploadingGallery}
-              className="flex items-center gap-2 px-5 py-2 rounded-lg bg-[#5cb83a] hover:bg-[#6dd144] text-[#09110e] font-bold text-xs disabled:opacity-60"
+              className="flex items-center gap-2 px-5 py-2 rounded-none bg-[#1ba8e8] hover:bg-[#3fc1ff] text-white font-bold text-xs disabled:opacity-60"
             >
               {saving && <Loader2 className="w-4 h-4 animate-spin" />}
               Lưu dự án
@@ -390,12 +390,12 @@ export function AdminProjectsPage() {
       ) : (
         <div className="space-y-2 mt-6">
           {items.map((item, index) => (
-            <div key={item.id} className="flex items-center gap-3 bg-white border border-[#dbe5df] rounded-xl p-3">
+            <div key={item.id} className="flex items-center gap-3 bg-white border border-[#dbdfe5] rounded-none p-3">
               <div className="flex flex-col gap-1">
                 <button
                   onClick={() => move(index, -1)}
                   disabled={index === 0}
-                  className="p-1 rounded text-slate-500 hover:text-slate-900 disabled:opacity-30"
+                  className="p-1 rounded-none text-slate-500 hover:text-slate-900 disabled:opacity-30"
                   title="Lên"
                 >
                   <ArrowUp className="w-3.5 h-3.5" />
@@ -403,14 +403,14 @@ export function AdminProjectsPage() {
                 <button
                   onClick={() => move(index, 1)}
                   disabled={index === items.length - 1}
-                  className="p-1 rounded text-slate-500 hover:text-slate-900 disabled:opacity-30"
+                  className="p-1 rounded-none text-slate-500 hover:text-slate-900 disabled:opacity-30"
                   title="Xuống"
                 >
                   <ArrowDown className="w-3.5 h-3.5" />
                 </button>
               </div>
 
-              <img src={item.image_url} alt="" className="w-16 h-12 object-cover rounded-lg border border-[#d8e2dd] shrink-0" />
+              <img src={item.image_url} alt="" className="w-16 h-12 object-cover rounded-none border border-[#d8dbe2] shrink-0" />
 
               <div className="flex-1 min-w-0">
                 <div className="text-sm font-bold text-slate-900 truncate">{item.title}</div>
@@ -422,7 +422,7 @@ export function AdminProjectsPage() {
                   type="checkbox"
                   checked={item.is_active}
                   onChange={(e) => toggleActive(item.id, e.target.checked)}
-                  className="accent-[#5cb83a]"
+                  className="accent-[#1ba8e8]"
                 />
                 Hiện
               </label>
@@ -431,13 +431,13 @@ export function AdminProjectsPage() {
 
               <button
                 onClick={() => openEdit(item)}
-                className="px-3 py-1.5 rounded-lg bg-[#e8eeec] text-slate-700 hover:text-slate-900 text-xs font-semibold"
+                className="px-3 py-1.5 rounded-none bg-[#e8e8ee] text-slate-700 hover:text-slate-900 text-xs font-semibold"
               >
                 Sửa
               </button>
               <button
                 onClick={() => removeItem(item.id)}
-                className="p-2 rounded-lg text-red-500 hover:bg-red-50"
+                className="p-2 rounded-none text-red-500 hover:bg-red-50"
                 title="Xóa"
               >
                 <Trash2 className="w-4 h-4" />

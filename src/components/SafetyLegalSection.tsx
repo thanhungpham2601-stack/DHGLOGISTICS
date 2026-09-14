@@ -1,4 +1,5 @@
 import { ShieldCheck, FileCheck, Radio, Check, Anchor, AlertCircle, Wrench } from 'lucide-react';
+import { Reveal, StaggerGroup, StaggerItem } from './Reveal';
 
 export function SafetyLegalSection() {
   const legalSupportList = [
@@ -27,34 +28,36 @@ export function SafetyLegalSection() {
   ];
 
   return (
-    <section id="safety-legal" className="relative py-20 bg-[#ecf2f0] border-b border-[#e1e9e5]">
+    <section id="safety-legal" className="relative py-20 bg-[#ececf2] border-b border-[#e1e3e9]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <div className="inline-flex items-center gap-2 text-xs font-bold text-[#1f6b12] tracking-widest uppercase font-mono bg-[#e5ede9] px-3.5 py-1.5 rounded-full border border-[#d9e4de]">
-            <ShieldCheck className="w-3.5 h-3.5 text-[#1f6b12]" />
-            <span>CHUẨN MỰC AN TOÀN & PHÁP LÝ</span>
+        <Reveal>
+          <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+            <div className="inline-flex items-center gap-2 text-xs font-bold text-[#0b6fa8] tracking-widest uppercase font-mono bg-[#e5e7ed] px-3.5 py-1.5 rounded-full border border-[#d9dce4]">
+              <ShieldCheck className="w-3.5 h-3.5 text-[#0b6fa8]" />
+              <span>CHUẨN MỰC AN TOÀN & PHÁP LÝ</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase text-slate-900 font-heading tracking-tight">
+              AN TOÀN HÀNG HÓA BẮT ĐẦU TỪ KHÂU CHUẨN BỊ
+            </h2>
+            <p className="text-sm sm:text-base text-slate-700">
+              Từ thủ tục pháp lý, giấy phép lưu hành đến phương án chằng buộc lashing và điều phối 24/7, DHG cam kết bảo vệ an toàn 100% tài sản của khách hàng.
+            </p>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase text-slate-900 font-heading tracking-tight">
-            AN TOÀN HÀNG HÓA BẮT ĐẦU TỪ KHÂU CHUẨN BỊ
-          </h2>
-          <p className="text-sm sm:text-base text-slate-700">
-            Từ thủ tục pháp lý, giấy phép lưu hành đến phương án chằng buộc lashing và điều phối 24/7, DHG cam kết bảo vệ an toàn 100% tài sản của khách hàng.
-          </p>
-        </div>
+        </Reveal>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          
+        <StaggerGroup className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
           {/* Card 1: Legal & Permits (PDF Section 6) */}
-          <div className="bg-[#e9efec] rounded-2xl border border-[#d9e3de] p-6 space-y-5 flex flex-col justify-between shadow-xl">
+          <StaggerItem className="bg-[#e9eaef] rounded-none border border-[#d9dce3] p-6 space-y-5 flex flex-col justify-between shadow-xl">
             <div>
-              <div className="flex items-center gap-3 pb-4 border-b border-[#dee7e2]">
-                <div className="p-3 rounded-xl bg-[#e1eae5] border border-[#d0ddd6] text-[#1f6b12]">
+              <div className="flex items-center gap-3 pb-4 border-b border-[#dee1e7]">
+                <div className="p-3 rounded-none bg-[#e1e4ea] border border-[#d0d4dd] text-[#0b6fa8]">
                   <FileCheck className="w-6 h-6" />
                 </div>
                 <div>
-                  <span className="text-[10px] font-mono font-bold text-[#1f6b12]">MỤC 06 • PDF</span>
+                  <span className="text-[10px] font-mono font-bold text-[#0b6fa8]">MỤC 06 • PDF</span>
                   <h3 className="text-lg font-bold text-slate-900 uppercase font-heading">
                     Thủ Tục Pháp Lý & Giấy Phép
                   </h3>
@@ -68,29 +71,29 @@ export function SafetyLegalSection() {
               <div className="mt-4 space-y-2">
                 {legalSupportList.map((item, idx) => (
                   <div key={idx} className="flex items-start gap-2 text-xs text-slate-700">
-                    <Check className="w-3.5 h-3.5 text-[#1f6b12] shrink-0 mt-0.5" />
+                    <Check className="w-3.5 h-3.5 text-[#0b6fa8] shrink-0 mt-0.5" />
                     <span>{item}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="pt-4 border-t border-[#dfe9e3]">
-              <span className="text-[11px] font-mono text-[#1f6b12] block">
+            <div className="pt-4 border-t border-[#dfe2e9]">
+              <span className="text-[11px] font-mono text-[#0b6fa8] block">
                 ✓ 100% chuyến hàng lưu hành đầy đủ giấy phép hợp lệ
               </span>
             </div>
-          </div>
+          </StaggerItem>
 
           {/* Card 2: Lashing & Securing Cargo (PDF Section 8) */}
-          <div className="bg-[#e9efec] rounded-2xl border border-[#d9e3de] p-6 space-y-5 flex flex-col justify-between shadow-xl">
+          <StaggerItem className="bg-[#e9eaef] rounded-none border border-[#d9dce3] p-6 space-y-5 flex flex-col justify-between shadow-xl">
             <div>
-              <div className="flex items-center gap-3 pb-4 border-b border-[#dee7e2]">
-                <div className="p-3 rounded-xl bg-[#e1eae5] border border-[#d0ddd6] text-[#1f6b12]">
+              <div className="flex items-center gap-3 pb-4 border-b border-[#dee1e7]">
+                <div className="p-3 rounded-none bg-[#e1e4ea] border border-[#d0d4dd] text-[#0b6fa8]">
                   <Wrench className="w-6 h-6" />
                 </div>
                 <div>
-                  <span className="text-[10px] font-mono font-bold text-[#1f6b12]">MỤC 08 • PDF</span>
+                  <span className="text-[10px] font-mono font-bold text-[#0b6fa8]">MỤC 08 • PDF</span>
                   <h3 className="text-lg font-bold text-slate-900 uppercase font-heading">
                     Bốc Xếp & Chằng Buộc Lashing
                   </h3>
@@ -104,29 +107,29 @@ export function SafetyLegalSection() {
               <div className="mt-4 space-y-2">
                 {lashingProtocols.map((item, idx) => (
                   <div key={idx} className="flex items-start gap-2 text-xs text-slate-700">
-                    <Check className="w-3.5 h-3.5 text-[#1f6b12] shrink-0 mt-0.5" />
+                    <Check className="w-3.5 h-3.5 text-[#0b6fa8] shrink-0 mt-0.5" />
                     <span>{item}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="pt-4 border-t border-[#dfe9e3]">
-              <span className="text-[11px] font-mono text-[#1f6b12] block">
+            <div className="pt-4 border-t border-[#dfe2e9]">
+              <span className="text-[11px] font-mono text-[#0b6fa8] block">
                 ✓ Thiết bị chằng buộc tiêu chuẩn EN 12195 / ISO
               </span>
             </div>
-          </div>
+          </StaggerItem>
 
           {/* Card 3: 24/7 Command & Dispatch (PDF Section 7) */}
-          <div className="bg-[#e9efec] rounded-2xl border border-[#d9e3de] p-6 space-y-5 flex flex-col justify-between shadow-xl">
+          <StaggerItem className="bg-[#e9eaef] rounded-none border border-[#d9dce3] p-6 space-y-5 flex flex-col justify-between shadow-xl">
             <div>
-              <div className="flex items-center gap-3 pb-4 border-b border-[#dee7e2]">
-                <div className="p-3 rounded-xl bg-[#e1eae5] border border-[#d0ddd6] text-[#1f6b12]">
+              <div className="flex items-center gap-3 pb-4 border-b border-[#dee1e7]">
+                <div className="p-3 rounded-none bg-[#e1e4ea] border border-[#d0d4dd] text-[#0b6fa8]">
                   <Radio className="w-6 h-6" />
                 </div>
                 <div>
-                  <span className="text-[10px] font-mono font-bold text-[#1f6b12]">MỤC 07 • PDF</span>
+                  <span className="text-[10px] font-mono font-bold text-[#0b6fa8]">MỤC 07 • PDF</span>
                   <h3 className="text-lg font-bold text-slate-900 uppercase font-heading">
                     Giám Sát & Điều Phối 24/7
                   </h3>
@@ -139,7 +142,7 @@ export function SafetyLegalSection() {
 
               <div className="mt-4 space-y-3">
                 {monitoringFeatures.map((m, idx) => (
-                  <div key={idx} className="p-2.5 rounded-lg bg-[#e5ede9] border border-[#dde7e2]">
+                  <div key={idx} className="p-2.5 rounded-none bg-[#e5e7ed] border border-[#dde0e7]">
                     <span className="text-xs font-bold text-slate-900 block">{m.title}</span>
                     <span className="text-[11px] text-slate-500 mt-0.5 block">{m.desc}</span>
                   </div>
@@ -147,14 +150,14 @@ export function SafetyLegalSection() {
               </div>
             </div>
 
-            <div className="pt-4 border-t border-[#dfe9e3]">
-              <span className="text-[11px] font-mono text-[#1f6b12] block">
+            <div className="pt-4 border-t border-[#dfe2e9]">
+              <span className="text-[11px] font-mono text-[#0b6fa8] block">
                 ✓ Trung tâm trực ban 24/7/365
               </span>
             </div>
-          </div>
+          </StaggerItem>
 
-        </div>
+        </StaggerGroup>
 
       </div>
     </section>

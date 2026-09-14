@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { motion, AnimatePresence, Variants } from 'motion/react';
 import { ArrowRight, ShieldCheck, MapPin, ChevronLeft, ChevronRight, CheckCircle, ExternalLink, Sparkles, Truck, Eye } from 'lucide-react';
 import { COMPANY_INFO } from '../data/companyData';
 
@@ -19,10 +20,10 @@ export const HERO_SLIDES = [
     titleLine1: "VẬN CHUYỂN",
     titleLine2: "CÁNH QUẠT ĐIỆN GIÓ",
     titleLine3: "KHẨU ĐỘ 85M",
-    desc: "Đoàn xe DHG Heavy Haul đầu kéo công suất 800HP kết hợp rơ-moóc rút chuyên dụng 55m bẻ lái tự động, vượt hơn 240km đường đèo dốc Tây Nguyên an toàn tuyệt đối.",
+    desc: "Đoàn xe DHG Transport đầu kéo công suất 800HP kết hợp rơ-moóc rút chuyên dụng 55m bẻ lái tự động, vượt hơn 240km đường đèo dốc Tây Nguyên an toàn tuyệt đối.",
     highlights: ["Rơ-moóc rút dài 55m", "Bẻ lái thủy lực trục sau", "Xe hoa tiêu dẫn đường 24/7", "Logo DHG độc quyền"],
     bgImage: bannerWindBlade,
-    truckModel: "Đầu kéo DHG Heavy Haul 8x4 800HP + Mooc rút 55m",
+    truckModel: "Đầu kéo DHG Transport 8x4 800HP + Mooc rút 55m",
     cargoBadge: "85M CHIỀU DÀI NGOẠI CỠ",
     cargoSub: "Hơn 120 cánh quạt điện gió vận chuyển an toàn",
   },
@@ -61,11 +62,21 @@ export const HERO_SLIDES = [
     desc: "Sơ-mi rơ-moóc sàn thấp (Lowbed) hạ sàn 40cm tháo rời cổ ngỗng tự hành, điều chuyển máy công trình hạng nặng giữa các đại công trường Bắc - Nam.",
     highlights: ["Sàn lùn hạ đáy 40cm", "Cổ ngỗng thủy lực tháo rời", "Lên xuống xe máy xúc 15 phút", "Chứng nhận lưu hành 63 tỉnh"],
     bgImage: bannerExcavatorLowbed,
-    truckModel: "Đầu kéo DHG Heavy Haul + Mooc lùn 6 trục",
+    truckModel: "Đầu kéo DHG Transport + Mooc lùn 6 trục",
     cargoBadge: "90 TẤN MÁY ĐÀO BÁNH XÍCH",
     cargoSub: "Điều chuyển máy móc công trình liên tỉnh",
   },
 ];
+
+const heroStagger: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.09, delayChildren: 0.05 } },
+};
+
+const heroItem: Variants = {
+  hidden: { opacity: 0, y: 22 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } },
+};
 
 export function Hero({ onOpenQuote, onOpenSurvey }: HeroProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -80,24 +91,32 @@ export function Hero({ onOpenQuote, onOpenSurvey }: HeroProps) {
   const slide = HERO_SLIDES[currentSlide];
 
   return (
-    <section id="hero" className="relative min-h-[92vh] flex items-center pt-24 pb-12 overflow-hidden bg-[#f5f8f6]">
+    <section id="hero" className="relative min-h-[92vh] flex items-center pt-24 pb-12 overflow-hidden bg-[#f5f6f8]">
       {/* Background Graphic & Texture */}
       <div className="absolute inset-0 bg-grid-pattern opacity-20 pointer-events-none" />
 
       {/* Dynamic Background Image with a light scrim so headline copy stays legible */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         {HERO_SLIDES.map((s, idx) => (
-          <div
+          <motion.div
             key={s.id}
-            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-              idx === currentSlide ? 'opacity-100 scale-100' : 'opacity-0 scale-105 pointer-events-none'
-            }`}
+            className="absolute inset-0 pointer-events-none"
             style={{
               backgroundImage: `url('${s.bgImage}')`,
               backgroundSize: 'cover',
               backgroundPosition: 'center 45%',
-              transition: 'opacity 1s ease-in-out, transform 8s ease-out'
             }}
+            initial={false}
+            animate={
+              idx === currentSlide
+                ? { opacity: 1, scale: 1.08 }
+                : { opacity: 0, scale: 1 }
+            }
+            transition={
+              idx === currentSlide
+                ? { opacity: { duration: 1, ease: 'easeInOut' }, scale: { duration: 7, ease: 'easeOut' } }
+                : { opacity: { duration: 1, ease: 'easeInOut' } }
+            }
           />
         ))}
         {/* Light scrim: keeps text readable on the left, lets the photo show through on the right */}
@@ -109,90 +128,101 @@ export function Hero({ onOpenQuote, onOpenSurvey }: HeroProps) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
 
           {/* Left Column: Main Typography & CTAs */}
-          <div className="lg:col-span-7 flex flex-col items-start space-y-6">
-
-            {/* Slogan Pill */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md bg-white/90 border border-[#dde5e1] text-xs font-semibold text-[#1f6b12] tracking-widest uppercase shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-[#5cb83a] animate-pulse" />
-              <span>{slide.tag}</span>
-            </div>
-
-            {/* Giant Heading */}
-            <div className="space-y-1">
-              <h1 className="text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight text-slate-900 font-heading leading-[0.95] drop-shadow-[0_2px_6px_rgba(255,255,255,0.85)]">
-                <div>{slide.titleLine1}</div>
-                <div className="text-[#1f6b12]">{slide.titleLine2}</div>
-                <div className="text-[#1f6b12]">{slide.titleLine3}</div>
-              </h1>
-            </div>
-
-            {/* Subtitle tag: ENGINEERING • LOGISTICS • HEAVY HAUL */}
-            <div className="flex items-center gap-2 text-xs sm:text-sm font-bold text-slate-900 tracking-widest font-mono drop-shadow-[0_1px_4px_rgba(255,255,255,0.9)]">
-              <span>ENGINEERING</span>
-              <span className="text-[#5cb83a]">•</span>
-              <span>LOGISTICS</span>
-              <span className="text-[#5cb83a]">•</span>
-              <span>HEAVY HAUL</span>
-            </div>
-
-            {/* Short Paragraph description */}
-            <p className="inline-block text-base sm:text-lg text-slate-900 max-w-xl font-semibold leading-relaxed bg-white/85 backdrop-blur-sm px-3.5 py-2.5 rounded-lg border border-[#dde5e1] shadow-sm">
-              {slide.desc}
-            </p>
-
-            {/* Feature Pills from PDF */}
-            <div className="grid grid-cols-2 gap-2 w-full max-w-lg pt-1">
-              {slide.highlights.map((item, i) => (
-                <div key={i} className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-800 bg-white/95 px-2.5 py-1.5 rounded border border-[#dde5e1] shadow-sm">
-                  <CheckCircle className="w-3.5 h-3.5 text-[#5cb83a] shrink-0" />
-                  <span className="truncate">{item}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-4 pt-3">
-              <button
-                onClick={onOpenSurvey}
-                id="hero-survey-btn"
-                className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-lg bg-[#5cb83a] hover:bg-[#6dd144] text-[#09110e] font-extrabold text-sm tracking-wider uppercase transition-all duration-200 shadow-xl shadow-[#5cb83a]/30 hover:shadow-[#5cb83a]/50 hover:-translate-y-0.5 cursor-pointer"
+          <div className="lg:col-span-7 flex flex-col items-start">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={slide.id}
+                variants={heroStagger}
+                initial="hidden"
+                animate="show"
+                exit={{ opacity: 0, y: -16, transition: { duration: 0.35 } }}
+                className="flex flex-col items-start space-y-6 w-full"
               >
-                <span>KHẢO SÁT DỰ ÁN</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
 
-              <a
-                href="#projects"
-                id="hero-view-projects-btn"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-white/90 hover:bg-white text-slate-900 font-bold text-sm tracking-wider uppercase border border-[#dde5e1] hover:border-[#5cb83a]/60 transition-all duration-200 cursor-pointer shadow-sm"
-              >
-                <span>XEM DỰ ÁN</span>
-              </a>
+                {/* Slogan Pill */}
+                <motion.div variants={heroItem} className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-none bg-white/90 border border-[#dddfe5] text-xs font-semibold text-[#0b6fa8] tracking-widest uppercase shadow-sm">
+                  <span className="w-2 h-2 rounded-full bg-[#1ba8e8] animate-pulse" />
+                  <span>{slide.tag}</span>
+                </motion.div>
 
-              <button
-                onClick={onOpenQuote}
-                id="hero-quote-btn"
-                className="text-xs font-semibold text-slate-700 hover:text-[#1f6b12] underline underline-offset-4 ml-2"
-              >
-                Nhận báo giá nhanh trong 15 phút →
-              </button>
-            </div>
+                {/* Giant Heading */}
+                <motion.div variants={heroItem} className="space-y-1">
+                  <h1 className="text-4xl sm:text-6xl md:text-7xl font-black uppercase tracking-tight text-slate-900 font-heading leading-[0.95] drop-shadow-[0_2px_6px_rgba(255,255,255,0.85)]">
+                    <div>{slide.titleLine1}</div>
+                    <div className="text-[#0b6fa8]">{slide.titleLine2}</div>
+                    <div className="text-[#0b6fa8]">{slide.titleLine3}</div>
+                  </h1>
+                </motion.div>
 
+                {/* Subtitle tag: ENGINEERING • LOGISTICS • TRANSPORT */}
+                <motion.div variants={heroItem} className="flex items-center gap-2 text-xs sm:text-sm font-bold text-slate-900 tracking-widest font-mono drop-shadow-[0_1px_4px_rgba(255,255,255,0.9)]">
+                  <span>ENGINEERING</span>
+                  <span className="text-[#1ba8e8]">•</span>
+                  <span>LOGISTICS</span>
+                  <span className="text-[#1ba8e8]">•</span>
+                  <span>TRANSPORT</span>
+                </motion.div>
+
+                {/* Short Paragraph description */}
+                <motion.p variants={heroItem} className="inline-block text-base sm:text-lg text-slate-900 max-w-xl font-semibold leading-relaxed bg-white/85 backdrop-blur-sm px-3.5 py-2.5 rounded-none border border-[#dddfe5] shadow-sm">
+                  {slide.desc}
+                </motion.p>
+
+                {/* Feature Pills from PDF */}
+                <motion.div variants={heroItem} className="grid grid-cols-2 gap-2 w-full max-w-lg pt-1">
+                  {slide.highlights.map((item, i) => (
+                    <div key={i} className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-800 bg-white/95 px-2.5 py-1.5 rounded-none border border-[#dddfe5] shadow-sm">
+                      <CheckCircle className="w-3.5 h-3.5 text-[#1ba8e8] shrink-0" />
+                      <span className="truncate">{item}</span>
+                    </div>
+                  ))}
+                </motion.div>
+
+                {/* Action Buttons */}
+                <motion.div variants={heroItem} className="flex flex-wrap items-center gap-4 pt-3">
+                  <button
+                    onClick={onOpenSurvey}
+                    id="hero-survey-btn"
+                    className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-none bg-[#1ba8e8] hover:bg-[#3fc1ff] text-white font-extrabold text-sm tracking-wider uppercase transition-all duration-200 shadow-xl shadow-[#1ba8e8]/30 hover:shadow-[#1ba8e8]/50 hover:-translate-y-0.5 cursor-pointer"
+                  >
+                    <span>KHẢO SÁT DỰ ÁN</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+
+                  <a
+                    href="#projects"
+                    id="hero-view-projects-btn"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-none bg-white/90 hover:bg-white text-slate-900 font-bold text-sm tracking-wider uppercase border border-[#dddfe5] hover:border-[#1ba8e8]/60 transition-all duration-200 cursor-pointer shadow-sm"
+                  >
+                    <span>XEM DỰ ÁN</span>
+                  </a>
+
+                  <button
+                    onClick={onOpenQuote}
+                    id="hero-quote-btn"
+                    className="text-xs font-semibold text-slate-700 hover:text-[#0b6fa8] underline underline-offset-4 ml-2"
+                  >
+                    Nhận báo giá nhanh trong 15 phút →
+                  </button>
+                </motion.div>
+
+              </motion.div>
+            </AnimatePresence>
           </div>
 
           {/* Right Column: Visual Showcase & Floating Metrics */}
           <div className="lg:col-span-5 relative flex flex-col justify-between items-end h-full">
 
             {/* Top Floating Badge */}
-            <div className="w-full sm:w-auto self-end bg-white/95 backdrop-blur-md border border-[#dde5e1] rounded-xl p-5 shadow-xl mb-8 relative group hover:border-[#5cb83a] transition-all">
+            <div className="w-full sm:w-auto self-end bg-white/95 backdrop-blur-md border border-[#dddfe5] rounded-none p-5 shadow-xl mb-8 relative group hover:border-[#1ba8e8] transition-all">
               <div className="flex items-start gap-4">
-                <div className="p-3 bg-[#5cb83a]/15 rounded-lg border border-[#5cb83a]/30 text-[#1f6b12]">
+                <div className="p-3 bg-[#1ba8e8]/15 rounded-none border border-[#1ba8e8]/30 text-[#0b6fa8]">
                   <ShieldCheck className="w-7 h-7" />
                 </div>
                 <div>
                   <div className="text-3xl sm:text-4xl font-black text-slate-900 font-heading tracking-tight flex items-baseline gap-1">
                     <span>{slide.cargoBadge.split(' ')[0]}</span>
-                    <span className="text-xs font-bold text-[#1f6b12] uppercase tracking-wider font-mono">
+                    <span className="text-xs font-bold text-[#0b6fa8] uppercase tracking-wider font-mono">
                       CHỨNG NHẬN
                     </span>
                   </div>
@@ -207,13 +237,13 @@ export function Hero({ onOpenQuote, onOpenSurvey }: HeroProps) {
             </div>
 
             {/* Truck Preview Card */}
-            <div className="w-full bg-white border border-[#dde5e1] rounded-xl p-4 shadow-lg">
-              <div className="flex items-center justify-between text-xs text-slate-500 pb-2 border-b border-[#e2eae6]">
-                <span className="flex items-center gap-1.5 font-mono text-[#1f6b12]">
-                  <span className="w-2 h-2 rounded-full bg-[#5cb83a] animate-ping"></span>
-                  PHƯƠNG TIỆN DHG HEAVY HAUL
+            <div className="w-full bg-white border border-[#dddfe5] rounded-none p-4 shadow-lg">
+              <div className="flex items-center justify-between text-xs text-slate-500 pb-2 border-b border-[#e2e4ea]">
+                <span className="flex items-center gap-1.5 font-mono text-[#0b6fa8]">
+                  <span className="w-2 h-2 rounded-full bg-[#1ba8e8] animate-ping"></span>
+                  PHƯƠNG TIỆN DHG TRANSPORT
                 </span>
-                <span className="text-[11px] font-mono text-slate-500 bg-[#eef3f1] px-2 py-0.5 rounded border border-[#dde5e1]">
+                <span className="text-[11px] font-mono text-slate-500 bg-[#eeeff3] px-2 py-0.5 rounded-none border border-[#dddfe5]">
                   BANNER 0{currentSlide + 1} / 04
                 </span>
               </div>
@@ -221,13 +251,13 @@ export function Hero({ onOpenQuote, onOpenSurvey }: HeroProps) {
                 <div className="space-y-1">
                   <p className="text-[11px] text-slate-500 font-mono uppercase">Cấu hình đoàn xe DHG</p>
                   <p className="text-xs sm:text-sm font-bold text-slate-900 flex items-center gap-1.5">
-                    <Truck className="w-4 h-4 text-[#5cb83a] shrink-0" />
+                    <Truck className="w-4 h-4 text-[#1ba8e8] shrink-0" />
                     <span className="truncate">{slide.truckModel}</span>
                   </p>
                 </div>
                 <button
                   onClick={onOpenQuote}
-                  className="text-xs font-bold px-3 py-2 rounded-lg bg-[#5cb83a] text-[#09110e] hover:bg-[#6dd144] transition-all shadow-md shrink-0"
+                  className="text-xs font-bold px-3 py-2 rounded-none bg-[#1ba8e8] text-white hover:bg-[#3fc1ff] transition-all shadow-md shrink-0"
                 >
                   Báo Giá Xe Này
                 </button>
@@ -235,7 +265,7 @@ export function Hero({ onOpenQuote, onOpenSurvey }: HeroProps) {
             </div>
 
             {/* Slide Pagination & Navigation 01 / 04 */}
-            <div className="flex items-center justify-between w-full mt-6 pt-4 border-t border-[#e2eae6]">
+            <div className="flex items-center justify-between w-full mt-6 pt-4 border-t border-[#e2e4ea]">
               {/* Slide Counter */}
               <div className="flex items-center gap-3">
                 <div className="flex gap-1.5">
@@ -244,14 +274,14 @@ export function Hero({ onOpenQuote, onOpenSurvey }: HeroProps) {
                       key={i}
                       onClick={() => setCurrentSlide(i)}
                       className={`h-2 rounded-full transition-all duration-300 ${
-                        i === currentSlide ? 'w-8 bg-[#5cb83a]' : 'w-2 bg-[#d8e2dd] hover:bg-[#b7cdbc]'
+                        i === currentSlide ? 'w-8 bg-[#1ba8e8]' : 'w-2 bg-[#d8dbe2] hover:bg-[#a9c8db]'
                       }`}
                       aria-label={`Go to slide ${i + 1}`}
                     />
                   ))}
                 </div>
                 <span className="text-sm font-bold font-mono text-slate-700">
-                  <span className="text-[#1f6b12]">0{currentSlide + 1}</span>
+                  <span className="text-[#0b6fa8]">0{currentSlide + 1}</span>
                   <span className="text-slate-500"> / 0{HERO_SLIDES.length}</span>
                 </span>
               </div>
@@ -260,14 +290,14 @@ export function Hero({ onOpenQuote, onOpenSurvey }: HeroProps) {
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setCurrentSlide((prev) => (prev - 1 + HERO_SLIDES.length) % HERO_SLIDES.length)}
-                  className="p-2 rounded-lg bg-white hover:bg-[#eef3f1] text-slate-600 hover:text-slate-900 border border-[#dde5e1] transition-colors"
+                  className="p-2 rounded-none bg-white hover:bg-[#eeeff3] text-slate-600 hover:text-slate-900 border border-[#dddfe5] transition-colors"
                   aria-label="Previous slide"
                 >
                   <ChevronLeft className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length)}
-                  className="p-2 rounded-lg bg-white hover:bg-[#eef3f1] text-slate-600 hover:text-slate-900 border border-[#dde5e1] transition-colors"
+                  className="p-2 rounded-none bg-white hover:bg-[#eeeff3] text-slate-600 hover:text-slate-900 border border-[#dddfe5] transition-colors"
                   aria-label="Next slide"
                 >
                   <ChevronRight className="w-4 h-4" />
@@ -280,10 +310,10 @@ export function Hero({ onOpenQuote, onOpenSurvey }: HeroProps) {
         </div>
 
         {/* 4 Interactive Banner Thumbnails Bar */}
-        <div className="mt-12 pt-8 border-t border-[#e2eae6]">
+        <div className="mt-12 pt-8 border-t border-[#e2e4ea]">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-[#5cb83a]" />
+              <Sparkles className="w-4 h-4 text-[#1ba8e8]" />
               <span className="text-xs font-mono font-bold text-slate-900 tracking-widest uppercase">
                 4 HÌNH ẢNH BANNER ĐỘI XE SIÊU TRƯỜNG SIÊU TRỌNG DHG
               </span>
@@ -298,14 +328,14 @@ export function Hero({ onOpenQuote, onOpenSurvey }: HeroProps) {
               <button
                 key={item.id}
                 onClick={() => setCurrentSlide(idx)}
-                className={`relative group text-left rounded-xl overflow-hidden border transition-all duration-300 p-2 sm:p-2.5 flex flex-col justify-between ${
+                className={`relative group text-left rounded-none overflow-hidden border transition-all duration-300 p-2 sm:p-2.5 flex flex-col justify-between ${
                   currentSlide === idx
-                    ? 'bg-white border-[#5cb83a] shadow-lg shadow-[#5cb83a]/20 scale-[1.02]'
-                    : 'bg-white/90 border-[#dde5e1] hover:border-[#a9c2b0] hover:bg-[#f5f8f6]'
+                    ? 'bg-white border-[#1ba8e8] shadow-lg shadow-[#1ba8e8]/20 scale-[1.02]'
+                    : 'bg-white/90 border-[#dddfe5] hover:border-[#a9b5c2] hover:bg-[#f5f6f8]'
                 }`}
               >
                 {/* Thumbnail Image */}
-                <div className="relative w-full aspect-video rounded-lg overflow-hidden mb-2 bg-[#eef3f1]">
+                <div className="relative w-full aspect-video rounded-none overflow-hidden mb-2 bg-[#eeeff3]">
                   <img
                     src={item.bgImage}
                     alt={item.titleLine2}
@@ -315,11 +345,11 @@ export function Hero({ onOpenQuote, onOpenSurvey }: HeroProps) {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
 
                   {/* DHG Logo Badge */}
-                  <div className="absolute top-1.5 left-1.5 px-1.5 py-0.5 rounded bg-[#09110e]/80 border border-[#5cb83a]/60 text-[9px] font-mono font-black text-[#83e05e]">
-                    DHG HEAVY HAUL
+                  <div className="absolute top-1.5 left-1.5 px-1.5 py-0.5 rounded-none bg-[#071433]/80 border border-[#1ba8e8]/60 text-[9px] font-mono font-black text-[#7fd4ff]">
+                    DHG TRANSPORT
                   </div>
 
-                  <div className="absolute bottom-1 right-1.5 text-[10px] font-mono font-bold text-white bg-black/60 px-1 rounded">
+                  <div className="absolute bottom-1 right-1.5 text-[10px] font-mono font-bold text-white bg-black/60 px-1 rounded-none">
                     0{idx + 1}
                   </div>
                 </div>
@@ -327,7 +357,7 @@ export function Hero({ onOpenQuote, onOpenSurvey }: HeroProps) {
                 {/* Banner Caption */}
                 <div>
                   <p className={`text-[11px] font-bold uppercase truncate transition-colors ${
-                    currentSlide === idx ? 'text-[#1f6b12]' : 'text-slate-700 group-hover:text-slate-900'
+                    currentSlide === idx ? 'text-[#0b6fa8]' : 'text-slate-700 group-hover:text-slate-900'
                   }`}>
                     {item.titleLine2}
                   </p>
@@ -338,7 +368,7 @@ export function Hero({ onOpenQuote, onOpenSurvey }: HeroProps) {
 
                 {/* Active Indicator Bar */}
                 <div className={`mt-2 h-1 rounded-full w-full transition-all duration-300 ${
-                  currentSlide === idx ? 'bg-[#5cb83a]' : 'bg-[#e2eae6]'
+                  currentSlide === idx ? 'bg-[#1ba8e8]' : 'bg-[#e2e4ea]'
                 }`} />
               </button>
             ))}

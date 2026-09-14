@@ -6,16 +6,18 @@ import bannerRefinerySilo from '../assets/images/dhg_heavy_haul_refinery_silo_17
 import bannerExcavatorLowbed from '../assets/images/dhg_heavy_haul_excavator_lowbed_1786671346913.jpg';
 
 export const COMPANY_INFO = {
-  name: "DHG HEAVY HAUL",
-  tagline: "ENGINEERING • LOGISTICS • HEAVY HAUL",
+  name: "DHG TRANSPORT",
+  legalName: "DHG TRANSPORT JOINT STOCK COMPANY",
+  legalNameShort: "DHG TRANSPORT JSC",
+  tagline: "ENGINEERING • LOGISTICS • TRANSPORT",
   slogan: "VẬN CHUYỂN SIÊU TRƯỜNG – SIÊU TRỌNG",
   subSlogan: "Giải pháp vận chuyển cho những tải trọng đặc biệt",
   description: "Từ máy móc công trình, thiết bị công nghiệp đến hàng hóa có kích thước và trọng lượng vượt quy định thông thường, chúng tôi cung cấp giải pháp vận chuyển trọn gói – an toàn – đúng kế hoạch trên toàn quốc.",
   hotline: "0798.600.600",
   hotlineFormatted: "0798 600 600",
   support247: "1900 6868",
-  email: "contact@dhg-heavyhaul.vn",
-  quoteEmail: "baogia@dhg-heavyhaul.vn",
+  email: "contact@dhgtransport.vn",
+  quoteEmail: "baogia@dhgtransport.vn",
   addressMain: "Tòa nhà DHG Logistics, Đường 356, Đình Vũ, TP. Hải Phòng",
   offices: [
     { city: "Hải Phòng", address: "Khu Kinh tế Đình Vũ, Q. Hải An, TP. Hải Phòng", phone: "0225 3888 668" },

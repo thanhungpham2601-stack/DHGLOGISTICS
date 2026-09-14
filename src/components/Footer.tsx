@@ -1,5 +1,6 @@
 import { Phone, Mail, MapPin, ShieldCheck, ArrowRight, ExternalLink } from 'lucide-react';
 import { COMPANY_INFO, CORE_SERVICES } from '../data/companyData';
+import { Logo } from './Logo';
 
 interface FooterProps {
   onOpenQuote: () => void;
@@ -7,38 +8,23 @@ interface FooterProps {
 
 export function Footer({ onOpenQuote }: FooterProps) {
   return (
-    <footer id="contact" className="bg-[#f1f5f4] text-slate-500 border-t border-[#e2e9e5] pt-16 pb-12">
+    <footer id="contact" className="bg-[#f1f1f5] text-slate-500 border-t border-[#e2e4e9] pt-16 pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Main Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-[#e4ebe8]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-[#e4e5eb]">
           
           {/* Col 1: Brand & Slogan */}
           <div className="lg:col-span-4 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-[#5cb83a] to-[#2e7418] rounded-lg border border-[#83e05e]/40 shadow-md">
-                <span className="font-black text-xl text-[#09110e] font-mono">DHG</span>
-              </div>
-              <div>
-                <div className="flex items-baseline gap-1.5">
-                  <span className="font-black text-2xl text-slate-900 font-heading tracking-wider">DHG</span>
-                  <span className="text-xs font-semibold px-1.5 py-0.5 rounded bg-[#5cb83a]/20 text-[#1f6b12] border border-[#5cb83a]/40 tracking-widest">
-                    HEAVY HAUL
-                  </span>
-                </div>
-                <span className="text-[10px] text-slate-500 font-mono tracking-wider block">
-                  ENGINEERING • LOGISTICS • HEAVY HAUL
-                </span>
-              </div>
-            </div>
+            <Logo />
 
             <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
               {COMPANY_INFO.description}
             </p>
 
             {/* Safety Certification Badge */}
-            <div className="p-3.5 rounded-xl bg-[#ecf1ef] border border-[#dde6e1] flex items-center gap-3">
-              <ShieldCheck className="w-7 h-7 text-[#1f6b12] shrink-0" />
+            <div className="p-3.5 rounded-none bg-[#ecedf1] border border-[#dde0e6] flex items-center gap-3">
+              <ShieldCheck className="w-7 h-7 text-[#0b6fa8] shrink-0" />
               <div className="text-xs">
                 <span className="font-bold text-slate-900 block">CHỨNG NHẬN TIÊU CHUẨN</span>
                 <span className="text-slate-500 text-[11px]">ISO 9001:2015 & Giấy phép lưu hành Bộ GTVT</span>
@@ -48,7 +34,7 @@ export function Footer({ onOpenQuote }: FooterProps) {
             <div className="pt-2">
               <button
                 onClick={onOpenQuote}
-                className="w-full py-3 rounded-lg bg-[#5cb83a] hover:bg-[#6dd144] text-[#09110e] font-bold text-xs uppercase tracking-wider transition-all shadow-lg shadow-[#1f6b12]/20"
+                className="w-full py-3 rounded-none bg-[#1ba8e8] hover:bg-[#3fc1ff] text-white font-bold text-xs uppercase tracking-wider transition-all shadow-lg shadow-[#0b6fa8]/20"
               >
                 Gửi Yêu Cầu Báo Giá Nhanh →
               </button>
@@ -57,7 +43,7 @@ export function Footer({ onOpenQuote }: FooterProps) {
 
           {/* Col 2: 6 Main Services */}
           <div className="lg:col-span-3 space-y-3">
-            <h4 className="text-xs font-bold text-slate-900 uppercase tracking-widest font-mono text-[#1f6b12]">
+            <h4 className="text-xs font-bold text-slate-900 uppercase tracking-widest font-mono text-[#0b6fa8]">
               DỊCH VỤ VẬN CHUYỂN
             </h4>
             <ul className="space-y-2 text-xs">
@@ -67,7 +53,7 @@ export function Footer({ onOpenQuote }: FooterProps) {
                     href="#services"
                     className="hover:text-slate-900 hover:underline transition-colors flex items-center gap-1.5"
                   >
-                    <span className="text-[#1f6b12] text-[10px] font-mono">{s.number}.</span>
+                    <span className="text-[#0b6fa8] text-[10px] font-mono">{s.number}.</span>
                     <span>{s.title}</span>
                   </a>
                 </li>
@@ -77,21 +63,21 @@ export function Footer({ onOpenQuote }: FooterProps) {
 
           {/* Col 3: Offices Nationwide */}
           <div className="lg:col-span-5 space-y-4">
-            <h4 className="text-xs font-bold text-slate-900 uppercase tracking-widest font-mono text-[#1f6b12]">
+            <h4 className="text-xs font-bold text-slate-900 uppercase tracking-widest font-mono text-[#0b6fa8]">
               MẠNG LƯỚI VĂN PHÒNG & BÃI XE TOÀN QUỐC
             </h4>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
               {COMPANY_INFO.offices.map((off, idx) => (
-                <div key={idx} className="p-3 rounded-lg bg-[#ebf1ef] border border-[#dee7e2] space-y-1">
+                <div key={idx} className="p-3 rounded-none bg-[#ebebf1] border border-[#dee1e7] space-y-1">
                   <div className="flex items-center gap-1.5 font-bold text-slate-900">
-                    <MapPin className="w-3.5 h-3.5 text-[#1f6b12]" />
+                    <MapPin className="w-3.5 h-3.5 text-[#0b6fa8]" />
                     <span>Chi Nhánh {off.city}</span>
                   </div>
                   <p className="text-[11px] text-slate-500 line-clamp-2">
                     {off.address}
                   </p>
-                  <p className="text-[11px] text-[#1f6b12] font-mono">
+                  <p className="text-[11px] text-[#0b6fa8] font-mono">
                     Tel: {off.phone}
                   </p>
                 </div>
@@ -102,16 +88,16 @@ export function Footer({ onOpenQuote }: FooterProps) {
             <div className="pt-2 flex flex-wrap items-center gap-4 text-xs">
               <a
                 href={`tel:${COMPANY_INFO.hotline}`}
-                className="flex items-center gap-2 text-slate-900 font-mono font-bold hover:text-[#1f6b12]"
+                className="flex items-center gap-2 text-slate-900 font-mono font-bold hover:text-[#0b6fa8]"
               >
-                <Phone className="w-4 h-4 text-[#1f6b12]" />
+                <Phone className="w-4 h-4 text-[#0b6fa8]" />
                 <span>Hotline 24/7: {COMPANY_INFO.hotlineFormatted}</span>
               </a>
               <a
                 href={`mailto:${COMPANY_INFO.email}`}
                 className="flex items-center gap-2 text-slate-700 hover:text-slate-900"
               >
-                <Mail className="w-4 h-4 text-[#1f6b12]" />
+                <Mail className="w-4 h-4 text-[#0b6fa8]" />
                 <span>{COMPANY_INFO.email}</span>
               </a>
             </div>
@@ -123,7 +109,7 @@ export function Footer({ onOpenQuote }: FooterProps) {
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
           <div>
-            © {new Date().getFullYear()} DHG Heavy Haul Logistics Vietnam. Bản quyền thuộc về Công ty DHG.
+            © {new Date().getFullYear()} {COMPANY_INFO.legalNameShort}. Bản quyền thuộc về {COMPANY_INFO.legalName}.
           </div>
           <div className="flex items-center space-x-6 text-[11px]">
             <a href="#hero" className="hover:text-slate-900 transition-colors">Trang chủ</a>

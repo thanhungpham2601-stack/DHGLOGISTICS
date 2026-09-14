@@ -96,31 +96,31 @@ export function AdminMenuPage() {
       </p>
 
       {error && (
-        <div className="mb-4 text-xs text-red-600 bg-red-50 border border-red-200 rounded-lg px-3 py-2">
+        <div className="mb-4 text-xs text-red-600 bg-red-50 border border-red-200 rounded-none px-3 py-2">
           {error}
         </div>
       )}
 
       <form
         onSubmit={createItem}
-        className="flex flex-wrap gap-3 mb-6 bg-[#ebf1ef] border border-[#dbe5df] rounded-xl p-4"
+        className="flex flex-wrap gap-3 mb-6 bg-[#ebebf1] border border-[#dbdfe5] rounded-none p-4"
       >
         <input
           placeholder="Tên mục (VD: TRANG CHỦ)"
           value={newLabel}
           onChange={(e) => setNewLabel(e.target.value)}
-          className="flex-1 min-w-[160px] px-3 py-2 rounded-lg bg-[#e8eeec] border border-[#d8e2dd] text-sm text-slate-900 outline-none focus:border-[#5cb83a]"
+          className="flex-1 min-w-[160px] px-3 py-2 rounded-none bg-[#e8e8ee] border border-[#d8dbe2] text-sm text-slate-900 outline-none focus:border-[#1ba8e8]"
         />
         <input
           placeholder="Liên kết (VD: #services)"
           value={newHref}
           onChange={(e) => setNewHref(e.target.value)}
-          className="flex-1 min-w-[160px] px-3 py-2 rounded-lg bg-[#e8eeec] border border-[#d8e2dd] text-sm text-slate-900 outline-none focus:border-[#5cb83a]"
+          className="flex-1 min-w-[160px] px-3 py-2 rounded-none bg-[#e8e8ee] border border-[#d8dbe2] text-sm text-slate-900 outline-none focus:border-[#1ba8e8]"
         />
         <button
           type="submit"
           disabled={creating}
-          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#5cb83a] hover:bg-[#6dd144] text-[#09110e] font-bold text-xs disabled:opacity-60"
+          className="flex items-center gap-2 px-4 py-2 rounded-none bg-[#1ba8e8] hover:bg-[#3fc1ff] text-white font-bold text-xs disabled:opacity-60"
         >
           {creating ? <Loader2 className="w-4 h-4 animate-spin" /> : <Plus className="w-4 h-4" />}
           Thêm mục
@@ -136,13 +136,13 @@ export function AdminMenuPage() {
           {items.map((item, index) => (
             <div
               key={item.id}
-              className="flex items-center gap-3 bg-[#ebf1ef] border border-[#dbe5df] rounded-xl p-3"
+              className="flex items-center gap-3 bg-[#ebebf1] border border-[#dbdfe5] rounded-none p-3"
             >
               <div className="flex flex-col gap-1">
                 <button
                   onClick={() => move(index, -1)}
                   disabled={index === 0}
-                  className="p-1 rounded text-slate-500 hover:text-slate-900 disabled:opacity-30"
+                  className="p-1 rounded-none text-slate-500 hover:text-slate-900 disabled:opacity-30"
                   title="Lên"
                 >
                   <ArrowUp className="w-3.5 h-3.5" />
@@ -150,7 +150,7 @@ export function AdminMenuPage() {
                 <button
                   onClick={() => move(index, 1)}
                   disabled={index === items.length - 1}
-                  className="p-1 rounded text-slate-500 hover:text-slate-900 disabled:opacity-30"
+                  className="p-1 rounded-none text-slate-500 hover:text-slate-900 disabled:opacity-30"
                   title="Xuống"
                 >
                   <ArrowDown className="w-3.5 h-3.5" />
@@ -160,12 +160,12 @@ export function AdminMenuPage() {
               <input
                 defaultValue={item.label}
                 onBlur={(e) => e.target.value !== item.label && updateItem(item.id, { label: e.target.value })}
-                className="flex-1 px-3 py-2 rounded-lg bg-[#e8eeec] border border-[#d8e2dd] text-sm text-slate-900 outline-none focus:border-[#5cb83a]"
+                className="flex-1 px-3 py-2 rounded-none bg-[#e8e8ee] border border-[#d8dbe2] text-sm text-slate-900 outline-none focus:border-[#1ba8e8]"
               />
               <input
                 defaultValue={item.href}
                 onBlur={(e) => e.target.value !== item.href && updateItem(item.id, { href: e.target.value })}
-                className="flex-1 px-3 py-2 rounded-lg bg-[#e8eeec] border border-[#d8e2dd] text-sm text-slate-900 outline-none focus:border-[#5cb83a]"
+                className="flex-1 px-3 py-2 rounded-none bg-[#e8e8ee] border border-[#d8dbe2] text-sm text-slate-900 outline-none focus:border-[#1ba8e8]"
               />
 
               <label className="flex items-center gap-2 text-xs text-slate-700 select-none whitespace-nowrap">
@@ -173,7 +173,7 @@ export function AdminMenuPage() {
                   type="checkbox"
                   checked={item.is_active}
                   onChange={(e) => updateItem(item.id, { is_active: e.target.checked })}
-                  className="accent-[#5cb83a]"
+                  className="accent-[#1ba8e8]"
                 />
                 Hiện
               </label>
@@ -182,7 +182,7 @@ export function AdminMenuPage() {
 
               <button
                 onClick={() => removeItem(item.id)}
-                className="p-2 rounded-lg text-red-500 hover:bg-red-50"
+                className="p-2 rounded-none text-red-500 hover:bg-red-50"
                 title="Xóa"
               >
                 <Trash2 className="w-4 h-4" />

@@ -4,16 +4,16 @@
   :root {
     --font-heading: 'Barlow Condensed', 'Oswald', sans-serif;
     --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-    --color-brand-green: #5cb83a;
-    --color-brand-green-hover: #6dd144;
-    --color-brand-dark: #101a14;
-    --color-brand-surface: #f2f6f2;
+    --color-brand-blue: #1ba8e8;
+    --color-brand-blue-hover: #3fc1ff;
+    --color-brand-dark: #071433;
+    --color-brand-surface: #f2f5f6;
   }
 
   body {
     font-family: var(--font-sans);
-    background-color: #f7faf7;
-    color: #101a14;
+    background-color: #f7f9fa;
+    color: #071433;
     overflow-x: hidden;
   }
 
@@ -29,29 +29,53 @@
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #eef2ef;
+  background: #eef0f2;
 }
 ::-webkit-scrollbar-thumb {
-  background: #b7cdbc;
+  background: #a9c8db;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #5cb83a;
+  background: #1ba8e8;
 }
 
 .glow-brand {
-  box-shadow: 0 0 35px -5px rgba(92, 184, 58, 0.35);
+  box-shadow: 0 0 35px -5px rgba(27, 168, 232, 0.35);
 }
 
-.text-gradient-green {
-  background: linear-gradient(135deg, #a3e635 0%, #5cb83a 50%, #22c55e 100%);
+.text-gradient-blue {
+  background: linear-gradient(135deg, #7fd4ff 0%, #1ba8e8 50%, #0a4e82 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.bg-dot-pattern {
+  background-image: radial-gradient(rgba(7, 20, 51, 0.14) 1.5px, transparent 1.5px);
+  background-size: 16px 16px;
 }
 
 .bg-grid-pattern {
   background-size: 40px 40px;
   background-image:
-    linear-gradient(to right, rgba(16, 26, 20, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(16, 26, 20, 0.05) 1px, transparent 1px);
+    linear-gradient(to right, rgba(7, 20, 51, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(7, 20, 51, 0.05) 1px, transparent 1px);
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
 }

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
+import { MarqueeBar } from './components/MarqueeBar';
 import { StatsBar } from './components/StatsBar';
 import { ServicesSection } from './components/ServicesSection';
 import { FleetSection } from './components/FleetSection';
@@ -10,9 +11,11 @@ import { LogisticsChainSection } from './components/LogisticsChainSection';
 import { SafetyLegalSection } from './components/SafetyLegalSection';
 import { ProjectsSection } from './components/ProjectsSection';
 import { WhyChooseUsSection } from './components/WhyChooseUsSection';
+import { OfficeNetworkSection } from './components/OfficeNetworkSection';
 import { QuoteSection } from './components/QuoteSection';
 import { Footer } from './components/Footer';
 import { SurveyModal } from './components/Modals';
+import { ScrollProgressBar } from './components/ScrollProgressBar';
 import { Phone, ArrowUp, FileText, MessageSquare } from 'lucide-react';
 import { COMPANY_INFO } from './data/companyData';
 import { ServiceItem } from './types';
@@ -33,7 +36,9 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#eff4f2] text-slate-900 selection:bg-[#5cb83a] selection:text-[#09110e]">
+    <div className="min-h-screen bg-[#eff0f4] text-slate-900 selection:bg-[#1ba8e8] selection:text-white">
+      <ScrollProgressBar />
+
       {/* Top Fixed Navbar */}
       <Navbar
         onOpenQuote={scrollToQuote}
@@ -47,6 +52,9 @@ export default function App() {
           onOpenQuote={scrollToQuote}
           onOpenSurvey={() => setIsSurveyModalOpen(true)}
         />
+
+        {/* Auto-scrolling capability ticker */}
+        <MarqueeBar />
 
         {/* Key Stats Ribbon (20+ Năm, 500+ Dự án, 100+ Thiết bị, 63 Tỉnh thành, 0 Tai nạn) */}
         <StatsBar />
@@ -86,6 +94,9 @@ export default function App() {
         {/* 12. Why Choose Us (PDF Section 12) */}
         <WhyChooseUsSection />
 
+        {/* Nationwide branch network */}
+        <OfficeNetworkSection />
+
         {/* 13 & 14. Interactive Quotation Form & Cargo Spec Checker (PDF Section 13 & 14) */}
         <QuoteSection />
       </main>
@@ -99,7 +110,7 @@ export default function App() {
         <button
           onClick={scrollToQuote}
           id="floating-quote-btn"
-          className="flex items-center gap-2 px-4 py-3 rounded-full bg-[#5cb83a] hover:bg-[#6dd144] text-[#09110e] font-extrabold text-xs shadow-2xl shadow-[#1f6b12]/40 hover:scale-105 transition-all cursor-pointer border border-[#85e261]"
+          className="flex items-center gap-2 px-4 py-3 rounded-full bg-[#1ba8e8] hover:bg-[#3fc1ff] text-white font-extrabold text-xs shadow-2xl shadow-[#0b6fa8]/40 hover:scale-105 transition-all cursor-pointer border border-[#61e2de]"
           title="Yêu cầu báo giá nhanh"
         >
           <FileText className="w-4 h-4" />
@@ -110,7 +121,7 @@ export default function App() {
         <a
           href={`tel:${COMPANY_INFO.hotline}`}
           id="floating-phone-btn"
-          className="flex items-center justify-center w-12 h-12 rounded-full bg-[#e3ebe7] hover:bg-[#dde7e2] text-[#1f6b12] border border-[#d0ddd6] shadow-xl hover:scale-110 transition-all"
+          className="flex items-center justify-center w-12 h-12 rounded-full bg-[#e3e5eb] hover:bg-[#dde0e7] text-[#0b6fa8] border border-[#d0d4dd] shadow-xl hover:scale-110 transition-all"
           title={`Gọi ngay ${COMPANY_INFO.hotlineFormatted}`}
         >
           <Phone className="w-5 h-5" />
@@ -120,7 +131,7 @@ export default function App() {
         <button
           onClick={scrollToTop}
           id="floating-scroll-top-btn"
-          className="flex items-center justify-center w-10 h-10 rounded-full bg-[#ebf1ef] hover:bg-[#e4ebe8] text-slate-500 hover:text-slate-900 border border-[#dbe5df] shadow-lg transition-all"
+          className="flex items-center justify-center w-10 h-10 rounded-full bg-[#ebebf1] hover:bg-[#e4e5eb] text-slate-500 hover:text-slate-900 border border-[#dbdfe5] shadow-lg transition-all"
           title="Lên đầu trang"
         >
           <ArrowUp className="w-4 h-4" />

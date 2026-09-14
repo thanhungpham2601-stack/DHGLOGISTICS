@@ -1,8 +1,10 @@
 import { useState, type FormEvent } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../lib/AuthContext';
+import { useNoIndex } from '../hooks/useNoIndex';
 
 export function AdminLoginPage() {
+  useNoIndex();
   const { session, loading, signIn } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -30,18 +32,18 @@ export function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#eff4f2] text-slate-900 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-[#eff0f4] text-slate-900 px-4">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-sm bg-[#ebf1ef] border border-[#dbe5df] rounded-xl p-8 space-y-5"
+        className="w-full max-w-sm bg-[#ebebf1] border border-[#dbdfe5] rounded-none p-8 space-y-5"
       >
         <div>
           <h1 className="text-xl font-extrabold text-slate-900">Đăng nhập Quản trị</h1>
-          <p className="text-xs text-slate-500 mt-1">DHG Heavy Haul Admin</p>
+          <p className="text-xs text-slate-500 mt-1">DHG Transport Admin</p>
         </div>
 
         {error && (
-          <div className="text-xs text-red-600 bg-red-50 border border-red-200 rounded-lg px-3 py-2">
+          <div className="text-xs text-red-600 bg-red-50 border border-red-200 rounded-none px-3 py-2">
             {error}
           </div>
         )}
@@ -53,7 +55,7 @@ export function AdminLoginPage() {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-3 py-2 rounded-lg bg-[#e8eeec] border border-[#d8e2dd] text-sm text-slate-900 outline-none focus:border-[#5cb83a]"
+            className="w-full px-3 py-2 rounded-none bg-[#e8e8ee] border border-[#d8dbe2] text-sm text-slate-900 outline-none focus:border-[#1ba8e8]"
           />
         </div>
 
@@ -64,14 +66,14 @@ export function AdminLoginPage() {
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-3 py-2 rounded-lg bg-[#e8eeec] border border-[#d8e2dd] text-sm text-slate-900 outline-none focus:border-[#5cb83a]"
+            className="w-full px-3 py-2 rounded-none bg-[#e8e8ee] border border-[#d8dbe2] text-sm text-slate-900 outline-none focus:border-[#1ba8e8]"
           />
         </div>
 
         <button
           type="submit"
           disabled={submitting}
-          className="w-full py-2.5 rounded-lg bg-[#5cb83a] hover:bg-[#6dd144] text-[#09110e] font-bold text-sm disabled:opacity-60"
+          className="w-full py-2.5 rounded-none bg-[#1ba8e8] hover:bg-[#3fc1ff] text-white font-bold text-sm disabled:opacity-60"
         >
           {submitting ? 'Đang đăng nhập...' : 'Đăng nhập'}
         </button>

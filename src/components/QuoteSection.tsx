@@ -3,6 +3,7 @@ import { Send, CheckCircle2, Phone, Mail, Upload, AlertCircle, Calculator, FileT
 import { COMPANY_INFO } from '../data/companyData';
 import { QuoteFormData } from '../types';
 import { supabase } from '../lib/supabaseClient';
+import { Reveal } from './Reveal';
 
 export function QuoteSection() {
   const [formData, setFormData] = useState<QuoteFormData>({
@@ -110,43 +111,45 @@ export function QuoteSection() {
   };
 
   return (
-    <section id="contact" className="relative py-20 bg-[#eef3f1] border-b border-[#e1e9e5]">
+    <section id="contact" className="relative py-20 bg-[#eeeff3] border-b border-[#e1e3e9]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header (PDF Section 13 CTA) */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <div className="inline-flex items-center gap-2 text-xs font-bold text-[#1f6b12] tracking-widest uppercase font-mono bg-[#e6edea] px-3.5 py-1.5 rounded-full border border-[#d9e4de]">
-            <FileText className="w-3.5 h-3.5 text-[#1f6b12]" />
-            <span>MỤC 13 & 14 • YÊU CẦU BÁO GIÁ & KHẢO SÁT</span>
+        <Reveal>
+          <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+            <div className="inline-flex items-center gap-2 text-xs font-bold text-[#0b6fa8] tracking-widest uppercase font-mono bg-[#e6e7ed] px-3.5 py-1.5 rounded-full border border-[#d9dce4]">
+              <FileText className="w-3.5 h-3.5 text-[#0b6fa8]" />
+              <span>MỤC 13 & 14 • YÊU CẦU BÁO GIÁ & KHẢO SÁT</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase text-slate-900 font-heading tracking-tight">
+              BẠN ĐANG CÓ MỘT LÔ HÀNG KHÔNG THỂ VẬN CHUYỂN BẰNG PHƯƠNG TIỆN THÔNG THƯỜNG?
+            </h2>
+            <p className="text-sm sm:text-base text-slate-700">
+              Hãy gửi cho chúng tôi kích thước, trọng lượng, hình ảnh hàng hóa và địa điểm nhận – giao. Đội ngũ kỹ thuật sẽ đánh giá và đề xuất phương án vận chuyển tối ưu chi phí trong vòng 15 phút.
+            </p>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase text-slate-900 font-heading tracking-tight">
-            BẠN ĐANG CÓ MỘT LÔ HÀNG KHÔNG THỂ VẬN CHUYỂN BẰNG PHƯƠNG TIỆN THÔNG THƯỜNG?
-          </h2>
-          <p className="text-sm sm:text-base text-slate-700">
-            Hãy gửi cho chúng tôi kích thước, trọng lượng, hình ảnh hàng hóa và địa điểm nhận – giao. Đội ngũ kỹ thuật sẽ đánh giá và đề xuất phương án vận chuyển tối ưu chi phí trong vòng 15 phút.
-          </p>
-        </div>
+        </Reveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Left: Contact Info & Support Channels */}
           <div className="lg:col-span-4 space-y-6">
-            <div className="bg-[#eaefed] rounded-2xl border border-[#d9e3de] p-6 space-y-5 shadow-xl">
-              <h3 className="text-xl font-bold text-slate-900 uppercase font-heading text-[#1f6b12]">
+            <div className="bg-[#eaebef] rounded-none border border-[#d9dce3] p-6 space-y-5 shadow-xl">
+              <h3 className="text-xl font-bold text-slate-900 uppercase font-heading text-[#0b6fa8]">
                 Kênh Tiếp Nhận Trực Tiếp 24/7
               </h3>
 
               <div className="space-y-4">
                 <a
                   href={`tel:${COMPANY_INFO.hotline}`}
-                  className="flex items-center gap-4 p-3.5 rounded-xl bg-[#e5ece9] border border-[#d7e2dc] hover:border-[#5cb83a] transition-all group"
+                  className="flex items-center gap-4 p-3.5 rounded-none bg-[#e5e6ec] border border-[#d7dae2] hover:border-[#1ba8e8] transition-all group"
                 >
-                  <div className="p-2.5 rounded-lg bg-[#dfe8e3] text-[#1f6b12] group-hover:bg-[#5cb83a] group-hover:text-[#09110e] transition-colors">
+                  <div className="p-2.5 rounded-none bg-[#dfe2e8] text-[#0b6fa8] group-hover:bg-[#1ba8e8] group-hover:text-white transition-colors">
                     <Phone className="w-5 h-5" />
                   </div>
                   <div>
                     <span className="text-[10px] text-slate-500 uppercase font-mono">Hotline Kỹ Thuật Dự Án</span>
-                    <p className="text-base font-bold text-slate-900 font-mono group-hover:text-[#1f6b12]">
+                    <p className="text-base font-bold text-slate-900 font-mono group-hover:text-[#0b6fa8]">
                       {COMPANY_INFO.hotlineFormatted}
                     </p>
                   </div>
@@ -154,14 +157,14 @@ export function QuoteSection() {
 
                 <a
                   href={`mailto:${COMPANY_INFO.email}`}
-                  className="flex items-center gap-4 p-3.5 rounded-xl bg-[#e5ece9] border border-[#d7e2dc] hover:border-[#5cb83a] transition-all group"
+                  className="flex items-center gap-4 p-3.5 rounded-none bg-[#e5e6ec] border border-[#d7dae2] hover:border-[#1ba8e8] transition-all group"
                 >
-                  <div className="p-2.5 rounded-lg bg-[#dfe8e3] text-[#1f6b12] group-hover:bg-[#5cb83a] group-hover:text-[#09110e] transition-colors">
+                  <div className="p-2.5 rounded-none bg-[#dfe2e8] text-[#0b6fa8] group-hover:bg-[#1ba8e8] group-hover:text-white transition-colors">
                     <Mail className="w-5 h-5" />
                   </div>
                   <div>
                     <span className="text-[10px] text-slate-500 uppercase font-mono">Email Tiếp Nhận Hồ Sơ</span>
-                    <p className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-[#1f6b12]">
+                    <p className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-[#0b6fa8]">
                       {COMPANY_INFO.quoteEmail}
                     </p>
                   </div>
@@ -170,32 +173,32 @@ export function QuoteSection() {
 
               {/* Instant Spec Checker Box */}
               {categoryResult && (
-                <div className="p-4 rounded-xl bg-[#e5ede9] border border-[#d4e0da] space-y-2 animate-in fade-in">
+                <div className="p-4 rounded-none bg-[#e5e7ed] border border-[#d4d7e0] space-y-2 animate-in fade-in">
                   <div className="flex items-center justify-between">
                     <span className="text-[10px] font-mono font-bold text-slate-500">PHÂN LOẠI TẢI TRỌNG</span>
-                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded border ${categoryResult.color}`}>
+                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-none border ${categoryResult.color}`}>
                       {categoryResult.text}
                     </span>
                   </div>
                   <div className="text-xs text-slate-800">
                     <span className="text-slate-500">Gợi ý phương tiện: </span>
-                    <span className="font-bold text-[#1f6b12]">{categoryResult.vehicle}</span>
+                    <span className="font-bold text-[#0b6fa8]">{categoryResult.vehicle}</span>
                   </div>
                 </div>
               )}
 
               {/* Promise list from PDF */}
-              <div className="pt-2 border-t border-[#dee7e2] space-y-2 text-xs text-slate-700">
+              <div className="pt-2 border-t border-[#dee1e7] space-y-2 text-xs text-slate-700">
                 <div className="flex items-center gap-2">
-                  <span className="text-[#1f6b12] font-bold">✓</span>
+                  <span className="text-[#0b6fa8] font-bold">✓</span>
                   <span>Phản hồi báo giá trong 15 phút</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-[#1f6b12] font-bold">✓</span>
+                  <span className="text-[#0b6fa8] font-bold">✓</span>
                   <span>Khảo sát hiện trường miễn phí</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-[#1f6b12] font-bold">✓</span>
+                  <span className="text-[#0b6fa8] font-bold">✓</span>
                   <span>Tư vấn phương án tối ưu cung đường</span>
                 </div>
               </div>
@@ -203,23 +206,23 @@ export function QuoteSection() {
           </div>
 
           {/* Right: Main Form (PDF Section 14) */}
-          <div className="lg:col-span-8 bg-[#ebf1ee] rounded-2xl border border-[#d9e3de] p-6 sm:p-8 shadow-2xl">
+          <div className="lg:col-span-8 bg-[#ebecf1] rounded-none border border-[#d9dce3] p-6 sm:p-8 shadow-2xl">
             
             {submitted ? (
               /* Success confirmation message directly matching PDF */
               <div className="py-8 text-center space-y-6 animate-in zoom-in-95 duration-300">
-                <div className="w-16 h-16 rounded-full bg-[#dde8e2] border border-[#5cb83a] text-[#1f6b12] flex items-center justify-center mx-auto shadow-xl shadow-[#1f6b12]/20">
+                <div className="w-16 h-16 rounded-full bg-[#dde0e8] border border-[#1ba8e8] text-[#0b6fa8] flex items-center justify-center mx-auto shadow-xl shadow-[#0b6fa8]/20">
                   <CheckCircle2 className="w-9 h-9" />
                 </div>
 
                 <div className="space-y-2 max-w-lg mx-auto">
-                  <span className="text-xs font-mono font-bold text-[#1f6b12] bg-[#e3ebe7] px-3 py-1 rounded-full border border-[#d3e0d9]">
+                  <span className="text-xs font-mono font-bold text-[#0b6fa8] bg-[#e3e5eb] px-3 py-1 rounded-full border border-[#d3d7e0]">
                     MÃ TIẾP NHẬN: #{refCode}
                   </span>
                   <h3 className="text-2xl sm:text-3xl font-black text-slate-900 font-heading uppercase">
                     ĐÃ TIẾP NHẬN YÊU CẦU THÀNH CÔNG!
                   </h3>
-                  <p className="text-sm text-slate-700 leading-relaxed bg-[#e7eeeb] p-4 rounded-xl border border-[#dbe5df]">
+                  <p className="text-sm text-slate-700 leading-relaxed bg-[#e7e8ee] p-4 rounded-none border border-[#dbdfe5]">
                     Thông tin của bạn đã được gửi đến bộ phận vận hành. Chúng tôi sẽ liên hệ lại trong vòng 15 phút để trao đổi thêm về hàng hóa, tuyến đường và phương án vận chuyển tối ưu.
                   </p>
                 </div>
@@ -227,7 +230,7 @@ export function QuoteSection() {
                 <div className="flex flex-wrap items-center justify-center gap-3 pt-4">
                   <a
                     href={`tel:${COMPANY_INFO.hotline}`}
-                    className="px-6 py-3 rounded-lg bg-[#5cb83a] text-[#09110e] font-bold text-xs uppercase tracking-wider hover:bg-[#6dd144] transition-all flex items-center gap-2"
+                    className="px-6 py-3 rounded-none bg-[#1ba8e8] text-white font-bold text-xs uppercase tracking-wider hover:bg-[#3fc1ff] transition-all flex items-center gap-2"
                   >
                     <Phone className="w-4 h-4" />
                     <span>Gọi trao đổi ngay ({COMPANY_INFO.hotlineFormatted})</span>
@@ -255,7 +258,7 @@ export function QuoteSection() {
                         companyName: '',
                       });
                     }}
-                    className="px-5 py-3 rounded-lg bg-[#e5ece8] text-slate-700 font-semibold text-xs border border-[#d7e1dc] hover:text-slate-900"
+                    className="px-5 py-3 rounded-none bg-[#e5e7ec] text-slate-700 font-semibold text-xs border border-[#d7dae1] hover:text-slate-900"
                   >
                     Gửi thêm yêu cầu khác
                   </button>
@@ -263,7 +266,7 @@ export function QuoteSection() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="flex items-center justify-between pb-3 border-b border-[#dde6e1]">
+                <div className="flex items-center justify-between pb-3 border-b border-[#dde0e6]">
                   <div>
                     <h3 className="text-lg font-bold text-slate-900 uppercase font-heading">
                       GỬI THÔNG TIN HÀNG HÓA CẦN VẬN CHUYỂN
@@ -272,12 +275,12 @@ export function QuoteSection() {
                       Điền thông số để nhận báo giá & phương án kỹ thuật chính xác nhất
                     </p>
                   </div>
-                  <span className="text-xs font-mono text-[#1f6b12] font-bold">MẪU SỐ 14</span>
+                  <span className="text-xs font-mono text-[#0b6fa8] font-bold">MẪU SỐ 14</span>
                 </div>
 
                 {/* Section 1: Thông số hàng hóa */}
                 <div>
-                  <h4 className="text-xs font-bold text-[#1f6b12] uppercase tracking-wider font-mono mb-3">
+                  <h4 className="text-xs font-bold text-[#0b6fa8] uppercase tracking-wider font-mono mb-3">
                     1. Thông Số Hàng Hóa & Thiết Bị (Bắt buộc)
                   </h4>
                   
@@ -292,7 +295,7 @@ export function QuoteSection() {
                         value={formData.cargoName}
                         onChange={(e) => setFormData({ ...formData, cargoName: e.target.value })}
                         placeholder="VD: Máy xúc bánh xích Liebherr, Bồn Silo 120T, Máy biến áp..."
-                        className="w-full px-3.5 py-2.5 rounded-lg bg-[#e7eeeb] border border-[#d9e3de] text-sm text-slate-900 placeholder-slate-500 focus:outline-none focus:border-[#5cb83a]"
+                        className="w-full px-3.5 py-2.5 rounded-none bg-[#e7e8ee] border border-[#d9dce3] text-sm text-slate-900 placeholder-slate-500 focus:outline-none focus:border-[#1ba8e8]"
                       />
                     </div>
 
@@ -306,7 +309,7 @@ export function QuoteSection() {
                         required
                         value={formData.quantity}
                         onChange={(e) => setFormData({ ...formData, quantity: e.target.value })}
-                        className="w-full px-3.5 py-2.5 rounded-lg bg-[#e7eeeb] border border-[#d9e3de] text-sm text-slate-900 focus:outline-none focus:border-[#5cb83a]"
+                        className="w-full px-3.5 py-2.5 rounded-none bg-[#e7e8ee] border border-[#d9dce3] text-sm text-slate-900 focus:outline-none focus:border-[#1ba8e8]"
                       />
                     </div>
                   </div>
@@ -323,7 +326,7 @@ export function QuoteSection() {
                         placeholder="VD: 14.5"
                         value={formData.length}
                         onChange={(e) => setFormData({ ...formData, length: e.target.value })}
-                        className="w-full px-3 py-2 rounded-lg bg-[#e7eeeb] border border-[#d9e3de] text-xs font-mono text-slate-900 focus:outline-none focus:border-[#5cb83a]"
+                        className="w-full px-3 py-2 rounded-none bg-[#e7e8ee] border border-[#d9dce3] text-xs font-mono text-slate-900 focus:outline-none focus:border-[#1ba8e8]"
                       />
                     </div>
 
@@ -337,7 +340,7 @@ export function QuoteSection() {
                         placeholder="VD: 3.8"
                         value={formData.width}
                         onChange={(e) => setFormData({ ...formData, width: e.target.value })}
-                        className="w-full px-3 py-2 rounded-lg bg-[#e7eeeb] border border-[#d9e3de] text-xs font-mono text-slate-900 focus:outline-none focus:border-[#5cb83a]"
+                        className="w-full px-3 py-2 rounded-none bg-[#e7e8ee] border border-[#d9dce3] text-xs font-mono text-slate-900 focus:outline-none focus:border-[#1ba8e8]"
                       />
                     </div>
 
@@ -351,7 +354,7 @@ export function QuoteSection() {
                         placeholder="VD: 4.2"
                         value={formData.height}
                         onChange={(e) => setFormData({ ...formData, height: e.target.value })}
-                        className="w-full px-3 py-2 rounded-lg bg-[#e7eeeb] border border-[#d9e3de] text-xs font-mono text-slate-900 focus:outline-none focus:border-[#5cb83a]"
+                        className="w-full px-3 py-2 rounded-none bg-[#e7e8ee] border border-[#d9dce3] text-xs font-mono text-slate-900 focus:outline-none focus:border-[#1ba8e8]"
                       />
                     </div>
 
@@ -366,7 +369,7 @@ export function QuoteSection() {
                         placeholder="VD: 65"
                         value={formData.weight}
                         onChange={(e) => setFormData({ ...formData, weight: e.target.value })}
-                        className="w-full px-3 py-2 rounded-lg bg-[#e7eeeb] border border-[#d9e3de] text-xs font-mono text-[#1f6b12] font-bold focus:outline-none focus:border-[#5cb83a]"
+                        className="w-full px-3 py-2 rounded-none bg-[#e7e8ee] border border-[#d9dce3] text-xs font-mono text-[#0b6fa8] font-bold focus:outline-none focus:border-[#1ba8e8]"
                       />
                     </div>
                   </div>
@@ -374,7 +377,7 @@ export function QuoteSection() {
 
                 {/* Section 2: Tuyến đường giao nhận */}
                 <div>
-                  <h4 className="text-xs font-bold text-[#1f6b12] uppercase tracking-wider font-mono mb-3">
+                  <h4 className="text-xs font-bold text-[#0b6fa8] uppercase tracking-wider font-mono mb-3">
                     2. Hành Trình & Thời Gian Vận Chuyển
                   </h4>
 
@@ -389,7 +392,7 @@ export function QuoteSection() {
                         value={formData.pickupLocation}
                         onChange={(e) => setFormData({ ...formData, pickupLocation: e.target.value })}
                         placeholder="VD: Cảng Hải Phòng / KCN Đình Vũ"
-                        className="w-full px-3.5 py-2.5 rounded-lg bg-[#e7eeeb] border border-[#d9e3de] text-sm text-slate-900 focus:outline-none focus:border-[#5cb83a]"
+                        className="w-full px-3.5 py-2.5 rounded-none bg-[#e7e8ee] border border-[#d9dce3] text-sm text-slate-900 focus:outline-none focus:border-[#1ba8e8]"
                       />
                     </div>
 
@@ -403,7 +406,7 @@ export function QuoteSection() {
                         value={formData.deliveryLocation}
                         onChange={(e) => setFormData({ ...formData, deliveryLocation: e.target.value })}
                         placeholder="VD: Công trường Nhà máy Điện Gió Đắk Lắk"
-                        className="w-full px-3.5 py-2.5 rounded-lg bg-[#e7eeeb] border border-[#d9e3de] text-sm text-slate-900 focus:outline-none focus:border-[#5cb83a]"
+                        className="w-full px-3.5 py-2.5 rounded-none bg-[#e7e8ee] border border-[#d9dce3] text-sm text-slate-900 focus:outline-none focus:border-[#1ba8e8]"
                       />
                     </div>
 
@@ -416,7 +419,7 @@ export function QuoteSection() {
                         required
                         value={formData.estimatedDate}
                         onChange={(e) => setFormData({ ...formData, estimatedDate: e.target.value })}
-                        className="w-full px-3.5 py-2 rounded-lg bg-[#e7eeeb] border border-[#d9e3de] text-sm text-slate-900 focus:outline-none focus:border-[#5cb83a]"
+                        className="w-full px-3.5 py-2 rounded-none bg-[#e7e8ee] border border-[#d9dce3] text-sm text-slate-900 focus:outline-none focus:border-[#1ba8e8]"
                       />
                     </div>
                   </div>
@@ -428,7 +431,7 @@ export function QuoteSection() {
                     <label className="block text-xs font-semibold text-slate-700 mb-1">
                       Hình ảnh hàng hóa / Bản vẽ kỹ thuật
                     </label>
-                    <label className="flex flex-col items-center justify-center p-3 rounded-lg border-2 border-dashed border-[#d7e2dc] hover:border-[#5cb83a] bg-[#e7eeeb] cursor-pointer transition-colors">
+                    <label className="flex flex-col items-center justify-center p-3 rounded-none border-2 border-dashed border-[#d7dae2] hover:border-[#1ba8e8] bg-[#e7e8ee] cursor-pointer transition-colors">
                       <Upload className="w-5 h-5 text-slate-500 mb-1" />
                       <span className="text-xs text-slate-700">
                         {fileAttached ? fileAttached : "Kéo thả hoặc nhấn để chọn file ảnh/PDF"}
@@ -447,14 +450,14 @@ export function QuoteSection() {
                       value={formData.specialRequirements}
                       onChange={(e) => setFormData({ ...formData, specialRequirements: e.target.value })}
                       placeholder="Ghi chú về cẩu bốc dỡ, đường vào chật hẹp, cần chạy đêm, bảo hiểm..."
-                      className="w-full px-3.5 py-2 rounded-lg bg-[#e7eeeb] border border-[#d9e3de] text-xs text-slate-900 placeholder-slate-500 focus:outline-none focus:border-[#5cb83a]"
+                      className="w-full px-3.5 py-2 rounded-none bg-[#e7e8ee] border border-[#d9dce3] text-xs text-slate-900 placeholder-slate-500 focus:outline-none focus:border-[#1ba8e8]"
                     />
                   </div>
                 </div>
 
                 {/* Section 4: Thông tin liên hệ */}
                 <div>
-                  <h4 className="text-xs font-bold text-[#1f6b12] uppercase tracking-wider font-mono mb-3">
+                  <h4 className="text-xs font-bold text-[#0b6fa8] uppercase tracking-wider font-mono mb-3">
                     3. Thông Tin Người Đại Diện Nhận Báo Giá
                   </h4>
 
@@ -469,7 +472,7 @@ export function QuoteSection() {
                         value={formData.customerName}
                         onChange={(e) => setFormData({ ...formData, customerName: e.target.value })}
                         placeholder="Nguyễn Văn A"
-                        className="w-full px-3 py-2 rounded-lg bg-[#e7eeeb] border border-[#d9e3de] text-xs text-slate-900 focus:outline-none focus:border-[#5cb83a]"
+                        className="w-full px-3 py-2 rounded-none bg-[#e7e8ee] border border-[#d9dce3] text-xs text-slate-900 focus:outline-none focus:border-[#1ba8e8]"
                       />
                     </div>
 
@@ -483,7 +486,7 @@ export function QuoteSection() {
                         value={formData.phoneNumber}
                         onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
                         placeholder="0988xxxxxx"
-                        className="w-full px-3 py-2 rounded-lg bg-[#e7eeeb] border border-[#d9e3de] text-xs text-slate-900 focus:outline-none focus:border-[#5cb83a]"
+                        className="w-full px-3 py-2 rounded-none bg-[#e7e8ee] border border-[#d9dce3] text-xs text-slate-900 focus:outline-none focus:border-[#1ba8e8]"
                       />
                     </div>
 
@@ -496,7 +499,7 @@ export function QuoteSection() {
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="contact@company.com"
-                        className="w-full px-3 py-2 rounded-lg bg-[#e7eeeb] border border-[#d9e3de] text-xs text-slate-900 focus:outline-none focus:border-[#5cb83a]"
+                        className="w-full px-3 py-2 rounded-none bg-[#e7e8ee] border border-[#d9dce3] text-xs text-slate-900 focus:outline-none focus:border-[#1ba8e8]"
                       />
                     </div>
 
@@ -509,7 +512,7 @@ export function QuoteSection() {
                         value={formData.companyName}
                         onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
                         placeholder="Công ty CP Xây dựng..."
-                        className="w-full px-3 py-2 rounded-lg bg-[#e7eeeb] border border-[#d9e3de] text-xs text-slate-900 focus:outline-none focus:border-[#5cb83a]"
+                        className="w-full px-3 py-2 rounded-none bg-[#e7e8ee] border border-[#d9dce3] text-xs text-slate-900 focus:outline-none focus:border-[#1ba8e8]"
                       />
                     </div>
                   </div>
@@ -518,7 +521,7 @@ export function QuoteSection() {
                 {/* Submit Action Button */}
                 <div className="pt-3 space-y-3">
                   {submitError && (
-                    <div className="flex items-center gap-2 text-xs text-red-600 bg-red-50 border border-red-200 rounded-lg px-3 py-2">
+                    <div className="flex items-center gap-2 text-xs text-red-600 bg-red-50 border border-red-200 rounded-none px-3 py-2">
                       <AlertCircle className="w-4 h-4 shrink-0" />
                       <span>{submitError}</span>
                     </div>
@@ -527,7 +530,7 @@ export function QuoteSection() {
                     type="submit"
                     id="submit-quote-btn"
                     disabled={submitting}
-                    className="w-full flex items-center justify-center gap-2 py-4 rounded-xl bg-[#5cb83a] hover:bg-[#6dd144] text-[#09110e] font-extrabold text-sm uppercase tracking-wider transition-all shadow-xl shadow-[#1f6b12]/25 hover:shadow-[#1f6b12]/40 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+                    className="w-full flex items-center justify-center gap-2 py-4 rounded-none bg-[#1ba8e8] hover:bg-[#3fc1ff] text-white font-extrabold text-sm uppercase tracking-wider transition-all shadow-xl shadow-[#0b6fa8]/25 hover:shadow-[#0b6fa8]/40 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                   >
                     {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
                     <span>{submitting ? 'ĐANG GỬI...' : 'GỬI YÊU CẦU BÁO GIÁ & PHƯƠNG ÁN KỸ THUẬT'}</span>
