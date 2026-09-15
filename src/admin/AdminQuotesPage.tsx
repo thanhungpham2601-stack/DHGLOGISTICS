@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Loader2, Mail, Paperclip, Phone, Trash2, X } from 'lucide-react';
+import { Download, Loader2, Mail, Paperclip, Phone, Search, Trash2, X } from 'lucide-react';
 import { supabase } from '../lib/supabaseClient';
 
 interface QuoteRequestRow {
@@ -40,11 +40,56 @@ function formatDate(iso: string) {
   return new Date(iso).toLocaleString('vi-VN', { dateStyle: 'short', timeStyle: 'short' });
 }
 
+const CSV_COLUMNS: { key: keyof QuoteRequestRow; label: string }[] = [
+  { key: 'ref_code', label: 'Mã yêu cầu' },
+  { key: 'created_at', label: 'Ngày gửi' },
+  { key: 'status', label: 'Trạng thái' },
+  { key: 'customer_name', label: 'Khách hàng' },
+  { key: 'phone_number', label: 'Số điện thoại' },
+  { key: 'email', label: 'Email' },
+  { key: 'company_name', label: 'Công ty' },
+  { key: 'cargo_name', label: 'Tên hàng hóa' },
+  { key: 'weight', label: 'Trọng lượng (tấn)' },
+  { key: 'quantity', label: 'Số lượng' },
+  { key: 'pickup_location', label: 'Điểm nhận' },
+  { key: 'delivery_location', label: 'Điểm giao' },
+  { key: 'estimated_date', label: 'Thời gian dự kiến' },
+  { key: 'admin_note', label: 'Ghi chú nội bộ' },
+];
+
+function csvEscape(value: unknown) {
+  const text = value === null || value === undefined ? '' : String(value);
+  return `"${text.replace(/"/g, '""')}"`;
+}
+
+function exportQuotesToCsv(rows: QuoteRequestRow[]) {
+  const header = CSV_COLUMNS.map((c) => csvEscape(c.label)).join(',');
+  const lines = rows.map((row) =>
+    CSV_COLUMNS.map((c) => {
+      const value = c.key === 'status' ? statusMeta(row.status).label : c.key === 'created_at' ? formatDate(row.created_at) : row[c.key];
+      return csvEscape(value);
+    }).join(','),
+  );
+  const csv = '﻿' + [header, ...lines].join('\r\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `bao-gia-dhg-${new Date().toISOString().slice(0, 10)}.csv`;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+}
+
 export function AdminQuotesPage() {
   const [items, setItems] = useState<QuoteRequestRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [statusFilter, setStatusFilter] = useState<string>('all');
+  const [search, setSearch] = useState('');
+  const [dateFrom, setDateFrom] = useState('');
+  const [dateTo, setDateTo] = useState('');
   const [activeId, setActiveId] = useState<string | null>(null);
   const [noteDraft, setNoteDraft] = useState('');
   const [saving, setSaving] = useState(false);
@@ -68,10 +113,19 @@ export function AdminQuotesPage() {
     load();
   }, []);
 
-  const filtered = useMemo(
-    () => (statusFilter === 'all' ? items : items.filter((i) => i.status === statusFilter)),
-    [items, statusFilter],
-  );
+  const filtered = useMemo(() => {
+    const term = search.trim().toLowerCase();
+    const from = dateFrom ? new Date(dateFrom + 'T00:00:00') : null;
+    const to = dateTo ? new Date(dateTo + 'T23:59:59') : null;
+    return items.filter((i) => {
+      if (statusFilter !== 'all' && i.status !== statusFilter) return false;
+      if (term && !i.customer_name.toLowerCase().includes(term) && !i.phone_number.toLowerCase().includes(term)) return false;
+      const createdAt = new Date(i.created_at);
+      if (from && createdAt < from) return false;
+      if (to && createdAt > to) return false;
+      return true;
+    });
+  }, [items, statusFilter, search, dateFrom, dateTo]);
 
   const active = items.find((i) => i.id === activeId) ?? null;
 
@@ -123,6 +177,46 @@ export function AdminQuotesPage() {
             Danh sách khách hàng gửi yêu cầu báo giá từ trang chủ.
           </p>
         </div>
+        <button
+          onClick={() => exportQuotesToCsv(filtered)}
+          disabled={filtered.length === 0}
+          className="flex items-center gap-2 px-3 py-2 rounded-none bg-white border border-[#d8dbe2] text-xs font-semibold text-slate-700 hover:border-slate-300 disabled:opacity-50 disabled:cursor-not-allowed shrink-0"
+          title="Xuất danh sách đang lọc ra file Excel/CSV"
+        >
+          <Download className="w-3.5 h-3.5" />
+          Xuất Excel ({filtered.length})
+        </button>
+      </div>
+
+      <div className="flex flex-wrap items-center gap-2 mt-4">
+        <div className="relative flex-1 min-w-[200px]">
+          <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Tìm theo tên khách hoặc số điện thoại..."
+            className="w-full pl-8 pr-3 py-2 rounded-none bg-white border border-[#d8dbe2] text-xs text-slate-900 outline-none focus:border-[#1ba8e8]"
+          />
+        </div>
+        <label className="flex items-center gap-1.5 text-xs text-slate-500">
+          Từ
+          <input
+            type="date"
+            value={dateFrom}
+            onChange={(e) => setDateFrom(e.target.value)}
+            className="px-2 py-2 rounded-none bg-white border border-[#d8dbe2] text-xs text-slate-700 outline-none focus:border-[#1ba8e8]"
+          />
+        </label>
+        <label className="flex items-center gap-1.5 text-xs text-slate-500">
+          Đến
+          <input
+            type="date"
+            value={dateTo}
+            onChange={(e) => setDateTo(e.target.value)}
+            className="px-2 py-2 rounded-none bg-white border border-[#d8dbe2] text-xs text-slate-700 outline-none focus:border-[#1ba8e8]"
+          />
+        </label>
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}

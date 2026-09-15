@@ -1,10 +1,33 @@
+import 'dotenv/config';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
-import { KNOWLEDGE_PAGES, SERVICE_PAGES, type ContentPage } from '../src/data/seoContent.ts';
+import { createClient } from '@supabase/supabase-js';
+import { CONTENT_PAGES_SELECT, mapContentPageRow, type ContentPage } from '../src/lib/contentPages.ts';
 
 const SITE_URL = 'https://dhgtransport.vn';
 const OUTPUT_DIR = process.env.PRERENDER_OUTPUT_DIR ?? 'dist';
 const ORGANIZATION = { '@type': 'Organization', name: 'DHG TRANSPORT', url: `${SITE_URL}/` };
+
+const supabaseUrl = process.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY;
+if (!supabaseUrl || !supabaseAnonKey) {
+  throw new Error('Missing VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY for prerender');
+}
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+async function loadContentPages(type: 'service' | 'knowledge'): Promise<ContentPage[]> {
+  const { data, error } = await supabase
+    .from('content_pages')
+    .select(CONTENT_PAGES_SELECT)
+    .eq('type', type)
+    .eq('is_active', true)
+    .order('sort_order', { ascending: true });
+  if (error) throw new Error(`Failed to load ${type} content pages: ${error.message}`);
+  return (data ?? []).map(mapContentPageRow);
+}
+
+const SERVICE_PAGES = await loadContentPages('service');
+const KNOWLEDGE_PAGES = await loadContentPages('knowledge');
 
 type Route = {
   path: string;

@@ -1,5 +1,5 @@
 import { Link, Navigate, Outlet, useLocation } from 'react-router-dom';
-import { LogOut, ListTree, FolderKanban, FileText } from 'lucide-react';
+import { LogOut, ListTree, FolderKanban, FileText, Newspaper } from 'lucide-react';
 import { useAuth } from '../lib/AuthContext';
 import { useNoIndex } from '../hooks/useNoIndex';
 
@@ -20,7 +20,12 @@ export function AdminLayout() {
     return <Navigate to="/admin/login" replace state={{ from: location }} />;
   }
 
-  if (!hasPermission('menu.manage') && !hasPermission('projects.manage') && !hasPermission('quotes.manage')) {
+  if (
+    !hasPermission('menu.manage') &&
+    !hasPermission('projects.manage') &&
+    !hasPermission('quotes.manage') &&
+    !hasPermission('content.manage')
+  ) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#eff0f4] text-slate-700 text-sm px-4 text-center">
         Tài khoản {profile?.email ?? ''} chưa được cấp quyền truy cập trang quản trị.
@@ -69,6 +74,15 @@ export function AdminLayout() {
             >
               <FileText className="w-4 h-4 text-[#0b6fa8]" />
               Yêu cầu Báo giá
+            </Link>
+          )}
+          {hasPermission('content.manage') && (
+            <Link
+              to="/admin/content"
+              className="flex items-center gap-2 px-3 py-2 rounded-none text-sm font-semibold text-slate-800 hover:bg-[#e5e7ec]"
+            >
+              <Newspaper className="w-4 h-4 text-[#0b6fa8]" />
+              Nội dung SEO
             </Link>
           )}
         </nav>

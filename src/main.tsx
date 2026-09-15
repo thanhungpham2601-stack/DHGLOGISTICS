@@ -28,6 +28,9 @@ const AdminProjectsPage = lazy(() =>
 const AdminQuotesPage = lazy(() =>
   import('./admin/AdminQuotesPage').then((m) => ({default: m.AdminQuotesPage})),
 );
+const AdminContentPage = lazy(() =>
+  import('./admin/AdminContentPage').then((m) => ({default: m.AdminContentPage})),
+);
 
 function AdminArea() {
   return (
@@ -39,6 +42,7 @@ function AdminArea() {
           <Route path="menu" element={<AdminMenuPage />} />
           <Route path="projects" element={<AdminProjectsPage />} />
           <Route path="quotes" element={<AdminQuotesPage />} />
+          <Route path="content" element={<AdminContentPage />} />
         </Route>
       </Routes>
     </AuthProvider>
