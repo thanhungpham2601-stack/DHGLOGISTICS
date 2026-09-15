@@ -43,3 +43,18 @@ export function webPageSchema(name: string, description: string, path: string) {
     isPartOf: { '@type': 'WebSite', name: COMPANY_INFO.name, url: seoUrl('/') },
   };
 }
+
+export function faqPageSchema(items: Array<{ question: string; answer: string }>) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: items.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  };
+}

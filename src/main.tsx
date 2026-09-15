@@ -3,7 +3,12 @@ import {createRoot} from 'react-dom/client';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import App from './App.tsx';
 import './index.css';
-import { KnowledgeIndexPage, KnowledgePage, ProjectsPage, ServicePage, ServicesIndexPage } from './pages/SeoPages.tsx';
+const seoPages = () => import('./pages/SeoPages.tsx');
+const KnowledgeIndexPage = lazy(() => seoPages().then((m) => ({default: m.KnowledgeIndexPage})));
+const KnowledgePage = lazy(() => seoPages().then((m) => ({default: m.KnowledgePage})));
+const ProjectsPage = lazy(() => seoPages().then((m) => ({default: m.ProjectsPage})));
+const ServicePage = lazy(() => seoPages().then((m) => ({default: m.ServicePage})));
+const ServicesIndexPage = lazy(() => seoPages().then((m) => ({default: m.ServicesIndexPage})));
 
 const AuthProvider = lazy(() =>
   import('./lib/AuthContext').then((m) => ({default: m.AuthProvider})),
@@ -45,11 +50,11 @@ createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="/dich-vu" element={<ServicesIndexPage />} />
-        <Route path="/dich-vu/:slug" element={<ServicePage />} />
-        <Route path="/du-an" element={<ProjectsPage />} />
-        <Route path="/kien-thuc" element={<KnowledgeIndexPage />} />
-        <Route path="/kien-thuc/:slug" element={<KnowledgePage />} />
+        <Route path="/dich-vu" element={<Suspense fallback={null}><ServicesIndexPage /></Suspense>} />
+        <Route path="/dich-vu/:slug" element={<Suspense fallback={null}><ServicePage /></Suspense>} />
+        <Route path="/du-an" element={<Suspense fallback={null}><ProjectsPage /></Suspense>} />
+        <Route path="/kien-thuc" element={<Suspense fallback={null}><KnowledgeIndexPage /></Suspense>} />
+        <Route path="/kien-thuc/:slug" element={<Suspense fallback={null}><KnowledgePage /></Suspense>} />
         <Route
           path="/admin/*"
           element={

@@ -2,8 +2,8 @@
 
 ## 1. Tình trạng ban đầu
 
-- Ứng dụng là Vite + React 19 client-side rendered, dùng `BrowserRouter`. Ban đầu chỉ có hai public routes: `/` và `/admin/*`.
-- `vercel.json` đã rewrite mọi đường dẫn về `index.html`; vì vậy refresh SPA hoạt động nhưng tất cả URL ban đầu đều nhận một HTML shell và metadata trang chủ.
+- Ứng dụng là Vite + React 19, dùng `BrowserRouter`. Ban đầu chỉ có hai public routes: `/` và `/admin/*`.
+- `vercel.json` đã rewrite mọi đường dẫn về `index.html`; do đó cần xuất file HTML tĩnh cho từng public URL để bot không chạy JavaScript không chỉ nhận HTML shell của trang chủ.
 - `index.html` đã có title, description, canonical, Open Graph, Twitter card và một `LocalBusiness` JSON-LD cho trang chủ. `robots.txt` đã khai báo sitemap; sitemap mới chỉ có trang chủ.
 - Trang chủ có một H1 trong hero và các section dùng H2/H3 phù hợp phần lớn. Tuy nhiên dịch vụ và dự án chỉ mở modal, không có URL nội dung/indexable.
 - Nhiều ảnh below-the-fold đã `loading="lazy"`; ảnh dịch vụ đang dùng Unsplash bên ngoài. Ảnh hero không lazy-load, phù hợp với vai trò LCP. Một số ảnh động/thumbnails không có `width`/`height` HTML nên cần kiểm tra CLS bằng Lighthouse trên production.
@@ -16,6 +16,8 @@
 - Thêm trang dịch vụ/kiến thức với một H1, câu trả lời trực tiếp ngay sau heading, phần giải thích, FAQ và liên kết nội bộ.
 - Thêm trang `/du-an` để tạo điểm vào indexable; nội dung dự án chi tiết vẫn được lấy động từ Supabase trên trang chủ nên không tạo claim/dự án giả.
 - Mở rộng sitemap, giữ `/admin` ngoài sitemap và robots. Cập nhật các liên kết dịch vụ/dự án/kiến thức trong navigation/footer.
+- Thêm prerender build-time cho toàn bộ public SEO URLs. Mỗi URL được xuất `index.html` riêng với nội dung semantic tối thiểu, metadata, canonical và JSON-LD phù hợp; React vẫn mount như cũ khi JavaScript khả dụng.
+- Tách các route dịch vụ, kiến thức và dự án khỏi bundle ban đầu bằng lazy loading.
 
 ## 3. Files đã sửa
 
@@ -45,11 +47,11 @@
 - `/dich-vu/boc-xep-chang-buoc-hang-hoa`
 - Năm URL kiến thức được yêu cầu trong sitemap.
 
-## 6. Lưu ý quan trọng về SPA và crawl
+## 6. Prerender và crawl
 
-Metadata route-level được cập nhật khi React chạy. Google thường render JavaScript, nhưng bot không render JavaScript, social preview crawler và phần HTML response ban đầu vẫn nhận metadata của `index.html`, không phải metadata riêng của từng route. Đây là giới hạn kiến trúc SPA hiện tại, chưa chuyển sang SSR/prerender để tránh rủi ro thay đổi production.
+`npm run build` hiện chạy Vite rồi prerender các public URLs vào `dist`. Các file đó có title, description, canonical, Open Graph, Twitter card, JSON-LD và nội dung semantic tương ứng ngay trong HTML response. React vẫn cập nhật metadata sau khi mount để điều hướng SPA tiếp tục hoạt động.
 
-Để đạt metadata HTML riêng chắc chắn cho mọi bot, bước tiếp theo là triển khai prerender/static generation cho 15 public routes hoặc chuyển public marketing layer sang SSR. Cần kiểm thử preview social và Google URL Inspection sau deploy trước khi chọn giải pháp.
+Cần kiểm tra trên Vercel sau deploy rằng static file được phục vụ trước SPA rewrite, dùng URL Inspection và social preview để xác nhận response thực tế.
 
 ## 7. Image SEO và performance
 
@@ -69,8 +71,7 @@ Các claim sau đã tồn tại trong source và được giữ nguyên, không 
 ## 9. Việc cần làm ngoài source code
 
 1. Xác minh các claim ở trên và sửa source/schema theo dữ liệu đã được duyệt.
-2. Triển khai prerender hoặc SSR cho public landing pages nếu cần đảm bảo HTML metadata cho non-JS crawlers.
-3. Trong Google Search Console: xác minh domain, gửi `https://dhgtransport.vn/sitemap.xml`, dùng URL Inspection cho homepage và từng nhóm URL, sau đó yêu cầu indexing.
+2. Trong Google Search Console: xác minh domain, gửi `https://dhgtransport.vn/sitemap.xml`, dùng URL Inspection cho homepage và từng nhóm URL, sau đó yêu cầu indexing.
 4. Kiểm tra Rich Results Test/Schema Validator với URL production; kiểm tra canonical, Open Graph preview và redirect HTTP→HTTPS/www nhất quán.
 5. Chạy Lighthouse mobile trên production, ưu tiên LCP hero, CLS của ảnh, cache/CDN và ảnh bên thứ ba.
 

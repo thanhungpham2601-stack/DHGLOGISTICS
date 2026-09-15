@@ -54,6 +54,9 @@ export function SEO({ title, description, path = '/', type = 'website', image = 
     link.href = canonical;
 
     const schemaId = 'route-structured-data';
+    // Build-time prerendered schema serves non-JavaScript crawlers. Once React
+    // mounts, replace it with the route's live schema to avoid duplicate JSON-LD.
+    document.getElementById('initial-structured-data')?.remove();
     document.getElementById(schemaId)?.remove();
     if (structuredData) {
       const script = document.createElement('script');
