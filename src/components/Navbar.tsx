@@ -11,9 +11,10 @@ interface NavbarProps {
 
 const DEFAULT_NAV_LINKS = [
   { label: 'TRANG CHỦ', href: '#hero' },
-  { label: 'DỊCH VỤ', href: '#services' },
+  { label: 'DỊCH VỤ', href: '/dich-vu' },
   { label: 'ĐỘI XE', href: '#fleet' },
-  { label: 'DỰ ÁN', href: '#projects' },
+  { label: 'DỰ ÁN', href: '/du-an' },
+  { label: 'KIẾN THỨC', href: '/kien-thuc' },
   { label: 'NĂNG LỰC', href: '#capabilities' },
   { label: 'QUY TRÌNH', href: '#process' },
   { label: 'LIÊN HỆ', href: '#contact' },

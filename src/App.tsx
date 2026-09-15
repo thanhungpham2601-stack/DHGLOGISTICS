@@ -19,6 +19,8 @@ import { ScrollProgressBar } from './components/ScrollProgressBar';
 import { Phone, ArrowUp, FileText, MessageSquare } from 'lucide-react';
 import { COMPANY_INFO } from './data/companyData';
 import { ServiceItem } from './types';
+import { SEO } from './components/SEO';
+import { organizationSchema, webPageSchema } from './lib/structuredData';
 
 export default function App() {
   const [isSurveyModalOpen, setIsSurveyModalOpen] = useState(false);
@@ -37,6 +39,16 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#eff0f4] text-slate-900 selection:bg-[#1ba8e8] selection:text-white">
+      <SEO
+        title="DHG Transport | Vận chuyển hàng siêu trường siêu trọng"
+        description={COMPANY_INFO.description}
+        path="/"
+        structuredData={[
+          organizationSchema,
+          { '@context': 'https://schema.org', '@type': 'WebSite', name: COMPANY_INFO.name, url: 'https://dhgtransport.vn/', inLanguage: 'vi-VN' },
+          webPageSchema('DHG Transport', COMPANY_INFO.description, '/'),
+        ]}
+      />
       <ScrollProgressBar />
 
       {/* Top Fixed Navbar */}

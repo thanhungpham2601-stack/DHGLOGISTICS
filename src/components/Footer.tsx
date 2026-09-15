@@ -50,7 +50,7 @@ export function Footer({ onOpenQuote }: FooterProps) {
               {CORE_SERVICES.map((s) => (
                 <li key={s.id}>
                   <a
-                    href="#services"
+                    href={`/dich-vu/${['van-chuyen-hang-sieu-truong-sieu-trong', 'van-chuyen-may-moc-cong-nghiep', 'khao-sat-tuyen-duong', 'thu-tuc-giay-phep', 'van-chuyen-hang-sieu-truong-sieu-trong', 'boc-xep-chang-buoc-hang-hoa'][CORE_SERVICES.indexOf(s)]}`}
                     className="hover:text-slate-900 hover:underline transition-colors flex items-center gap-1.5"
                   >
                     <span className="text-[#0b6fa8] text-[10px] font-mono">{s.number}.</span>
@@ -113,9 +113,10 @@ export function Footer({ onOpenQuote }: FooterProps) {
           </div>
           <div className="flex items-center space-x-6 text-[11px]">
             <a href="#hero" className="hover:text-slate-900 transition-colors">Trang chủ</a>
-            <a href="#services" className="hover:text-slate-900 transition-colors">Dịch vụ</a>
+            <a href="/dich-vu" className="hover:text-slate-900 transition-colors">Dịch vụ</a>
             <a href="#fleet" className="hover:text-slate-900 transition-colors">Đội xe</a>
-            <a href="#projects" className="hover:text-slate-900 transition-colors">Dự án</a>
+            <a href="/du-an" className="hover:text-slate-900 transition-colors">Dự án</a>
+            <a href="/kien-thuc" className="hover:text-slate-900 transition-colors">Kiến thức</a>
             <a href="#process" className="hover:text-slate-900 transition-colors">Quy trình</a>
           </div>
         </div>

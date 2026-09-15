@@ -3,6 +3,7 @@ import {createRoot} from 'react-dom/client';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import App from './App.tsx';
 import './index.css';
+import { KnowledgeIndexPage, KnowledgePage, ProjectsPage, ServicePage, ServicesIndexPage } from './pages/SeoPages.tsx';
 
 const AuthProvider = lazy(() =>
   import('./lib/AuthContext').then((m) => ({default: m.AuthProvider})),
@@ -44,6 +45,11 @@ createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
+        <Route path="/dich-vu" element={<ServicesIndexPage />} />
+        <Route path="/dich-vu/:slug" element={<ServicePage />} />
+        <Route path="/du-an" element={<ProjectsPage />} />
+        <Route path="/kien-thuc" element={<KnowledgeIndexPage />} />
+        <Route path="/kien-thuc/:slug" element={<KnowledgePage />} />
         <Route
           path="/admin/*"
           element={

@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
+import type { ReactNode } from 'react';
 
 export function Breadcrumbs({ items }: { items: Array<{ label: string; to?: string }> }) {
   return <nav aria-label="Breadcrumb" className="text-sm text-slate-600 mb-8"><ol className="flex flex-wrap gap-2"><li><Link className="hover:text-[#0b6fa8]" to="/">Trang chủ</Link></li>{items.map((item) => <li key={item.label} className="flex gap-2"><span aria-hidden="true">›</span>{item.to ? <Link className="hover:text-[#0b6fa8]" to={item.to}>{item.label}</Link> : <span aria-current="page">{item.label}</span>}</li>)}</ol></nav>;
 }
 
-export function AnswerBlock({ question, answer, children }: { question: string; answer: string; children?: React.ReactNode }) {
+export function AnswerBlock({ question, answer, children }: { question: string; answer: string; children?: ReactNode }) {
   return <section className="py-7 border-t border-slate-200"><h2 className="text-2xl sm:text-3xl font-black text-slate-900 font-heading">{question}</h2><p className="mt-4 text-base leading-8 text-slate-700 font-medium">{answer}</p>{children && <div className="mt-4 text-slate-700 leading-7">{children}</div>}</section>;
 }
 
