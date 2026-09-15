@@ -62,12 +62,12 @@ export function Navbar({ onOpenQuote, onOpenSurvey }: NavbarProps) {
           </a>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-7">
+          <nav className="hidden lg:flex items-center gap-4 xl:gap-5">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                className="text-xs font-bold tracking-widest text-slate-700 hover:text-[#0b6fa8] transition-colors relative py-1 group"
+                className="shrink-0 whitespace-nowrap text-xs font-bold tracking-widest text-slate-700 hover:text-[#0b6fa8] transition-colors relative py-1 group"
               >
                 {link.label}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#1ba8e8] transition-all duration-200 group-hover:w-full" />
