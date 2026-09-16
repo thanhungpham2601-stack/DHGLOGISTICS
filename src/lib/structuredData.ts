@@ -12,10 +12,17 @@ export const organizationSchema = {
   description: COMPANY_INFO.description,
   telephone: `+84${COMPANY_INFO.hotline.replace(/\D/g, '').replace(/^0/, '')}`,
   email: COMPANY_INFO.email,
+  taxID: COMPANY_INFO.taxCode,
   address: {
     '@type': 'PostalAddress',
     streetAddress: COMPANY_INFO.addressMain,
+    addressLocality: 'Thành phố Hồ Chí Minh',
     addressCountry: 'VN',
+  },
+  employee: {
+    '@type': 'Person',
+    name: COMPANY_INFO.legalRepresentative,
+    jobTitle: 'Người đại diện theo pháp luật',
   },
 };
 

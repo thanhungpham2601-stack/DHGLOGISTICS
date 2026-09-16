@@ -1,95 +1,106 @@
-import { useState } from 'react';
-import { MapPin, Phone, ArrowRight } from 'lucide-react';
+import { Phone, Mail, ArrowRight, Building2, Briefcase, Navigation } from 'lucide-react';
 import { COMPANY_INFO } from '../data/companyData';
 import { Reveal } from './Reveal';
-
-const OFFICE_ORDER = ['Hà Nội', 'Hải Phòng', 'Đà Nẵng', 'TP. Hồ Chí Minh'];
+import { HO_CHI_MINH_POINT, VietnamMapDots } from './VietnamMapDots';
 
 export function OfficeNetworkSection() {
-  const offices = [...COMPANY_INFO.offices].sort(
-    (a, b) => OFFICE_ORDER.indexOf(a.city) - OFFICE_ORDER.indexOf(b.city),
-  );
-  const [active, setActive] = useState(0);
+  const office = COMPANY_INFO.offices[0];
+  const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(office.address)}`;
+
+  const infoRows = [
+    { icon: Phone, label: 'Hotline 24/7', value: COMPANY_INFO.hotlineFormatted, href: `tel:${COMPANY_INFO.hotline}` },
+    { icon: Mail, label: 'Email', value: COMPANY_INFO.email, href: `mailto:${COMPANY_INFO.email}` },
+    { icon: Briefcase, label: 'Lĩnh vực chính', value: COMPANY_INFO.businessField },
+  ];
 
   return (
     <section id="network" className="relative py-20 bg-[#eeeff3] border-b border-[#e1e3e9] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Reveal>
-          <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+          <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
             <div className="inline-flex items-center gap-2 text-xs font-bold text-[#0b6fa8] tracking-widest uppercase font-mono bg-[#e6e7ed] px-3.5 py-1.5 rounded-full border border-[#d9dce4]">
-              <MapPin className="w-3.5 h-3.5 text-[#0b6fa8]" />
-              <span>MẠNG LƯỚI TOÀN QUỐC</span>
+              <Building2 className="w-3.5 h-3.5 text-[#0b6fa8]" />
+              <span>TRỤ SỞ CHÍNH</span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black uppercase text-slate-900 font-heading tracking-tight">
-              KẾT NỐI XUYÊN SUỐT BẮC – TRUNG – NAM
+              THÔNG TIN LIÊN HỆ TRỤ SỞ
             </h2>
             <p className="text-sm sm:text-base text-slate-700">
-              4 chi nhánh và bãi xe chiến lược trải dọc chiều dài đất nước, sẵn sàng điều phối phương tiện đến bất kỳ công trường nào.
+              Trụ sở chính đặt tại {office.city}, sẵn sàng điều phối phương tiện phục vụ công trình trên toàn quốc.
             </p>
           </div>
         </Reveal>
 
-        {/* Route line with office nodes */}
         <Reveal delay={0.1}>
-          <div className="bg-[#e8eaef] rounded-none border border-[#d9dce3] p-6 sm:p-10 shadow-xl">
-            <div className="flex flex-col lg:flex-row items-stretch gap-0 lg:gap-0 relative">
-              {/* Connecting line */}
-              <div className="hidden lg:block absolute left-0 right-0 top-[22px] h-0.5 bg-gradient-to-r from-[#1ba8e8]/20 via-[#1ba8e8] to-[#1ba8e8]/20 z-0" />
-              <div className="lg:hidden absolute top-0 bottom-0 left-[22px] w-0.5 bg-gradient-to-b from-[#1ba8e8]/20 via-[#1ba8e8] to-[#1ba8e8]/20 z-0" />
+          <div className="max-w-5xl mx-auto rounded-none border border-[#d9dce3] shadow-2xl shadow-[#0b6fa8]/10 overflow-hidden grid grid-cols-1 lg:grid-cols-12">
+            {/* Left: dark brand panel with address */}
+            <div className="relative lg:col-span-5 bg-gradient-to-br from-[#0a4e82] to-[#071433] text-white p-8 sm:p-10 flex flex-col justify-between overflow-hidden min-h-[340px]">
+              <div className="absolute top-2 bottom-14 inset-x-2">
+                <VietnamMapDots
+                  className="w-full h-full text-white/15"
+                  markerPoint={HO_CHI_MINH_POINT}
+                  markerClassName="text-[#1ba8e8]"
+                />
+              </div>
 
-              {offices.map((office, idx) => {
-                const isActive = idx === active;
-                return (
-                  <button
-                    key={office.city}
-                    onClick={() => setActive(idx)}
-                    className="relative z-10 flex lg:flex-col items-center gap-3 lg:gap-3 flex-1 py-3 lg:py-0 text-left lg:text-center group cursor-pointer"
-                  >
-                    <span className="relative flex items-center justify-center w-11 h-11 shrink-0">
-                      {isActive && (
-                        <span className="absolute inset-0 rounded-full bg-[#1ba8e8]/40 animate-ping" />
-                      )}
-                      <span
-                        className={`relative w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
-                          isActive
-                            ? 'bg-[#1ba8e8] border-[#0a4e82] scale-110'
-                            : 'bg-white border-[#c3cad6] group-hover:border-[#1ba8e8]'
-                        }`}
-                      >
-                        <MapPin className={`w-3 h-3 ${isActive ? 'text-white' : 'text-[#0b6fa8]'}`} />
-                      </span>
-                    </span>
-                    <span
-                      className={`text-xs sm:text-sm font-bold uppercase tracking-wide transition-colors ${
-                        isActive ? 'text-[#0b6fa8]' : 'text-slate-700 group-hover:text-slate-900'
-                      }`}
-                    >
-                      {office.city}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Active office detail card */}
-            <div className="mt-8 pt-6 border-t border-[#dde0e6] grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
-              <div className="p-4 rounded-none bg-[#e5e7ed] border border-[#dde1e7] space-y-1.5">
-                <div className="flex items-center gap-1.5 font-bold text-slate-900 text-sm">
-                  <MapPin className="w-4 h-4 text-[#0b6fa8] shrink-0" />
-                  <span>Chi Nhánh {offices[active].city}</span>
+              <div className="relative space-y-5">
+                <div>
+                  <div className="text-[11px] font-mono font-bold tracking-widest text-[#7fd4ff] uppercase mb-1.5">
+                    {office.city}
+                  </div>
+                  <p className="text-lg sm:text-xl font-bold leading-snug">
+                    {office.address}
+                  </p>
                 </div>
-                <p className="text-xs text-slate-600 leading-relaxed">{offices[active].address}</p>
-                <p className="text-xs text-[#0b6fa8] font-mono flex items-center gap-1.5 pt-1">
-                  <Phone className="w-3.5 h-3.5" />
-                  <span>{offices[active].phone}</span>
-                </p>
               </div>
 
               <a
-                href={`tel:${offices[active].phone.replace(/\s/g, '')}`}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-none bg-[#1ba8e8] hover:bg-[#3fc1ff] text-white font-bold text-xs tracking-wider uppercase transition-all shadow-lg shadow-[#0b6fa8]/20 sm:justify-self-end w-full sm:w-auto"
+                href={mapsHref}
+                target="_blank"
+                rel="noreferrer"
+                className="relative inline-flex items-center gap-2 mt-8 text-xs font-bold text-white/90 hover:text-white uppercase tracking-wider group"
               >
-                <span>Liên hệ chi nhánh này</span>
+                <Navigation className="w-3.5 h-3.5" />
+                <span>Xem trên Google Maps</span>
+                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+              </a>
+            </div>
+
+            {/* Right: contact detail grid */}
+            <div className="lg:col-span-7 bg-white p-8 sm:p-10 flex flex-col justify-between gap-8">
+              <div className="grid grid-cols-1 gap-y-6">
+                {infoRows.map((row) => {
+                  const Icon = row.icon;
+                  const content = (
+                    <>
+                      <span className="flex items-center justify-center w-9 h-9 rounded-full bg-[#eaf6fd] border border-[#d3ebfa] shrink-0">
+                        <Icon className="w-4 h-4 text-[#0b6fa8]" />
+                      </span>
+                      <div className="min-w-0">
+                        <div className="text-[10px] font-semibold text-slate-500 uppercase tracking-wide">
+                          {row.label}
+                        </div>
+                        <div className="text-sm font-bold text-slate-900 break-words">{row.value}</div>
+                      </div>
+                    </>
+                  );
+                  return row.href ? (
+                    <a key={row.label} href={row.href} className="flex items-center gap-3 group">
+                      <span className="contents group-hover:[&_div]:text-[#0b6fa8]">{content}</span>
+                    </a>
+                  ) : (
+                    <div key={row.label} className="flex items-center gap-3">
+                      {content}
+                    </div>
+                  );
+                })}
+              </div>
+
+              <a
+                href={`tel:${COMPANY_INFO.hotline}`}
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-none bg-[#1ba8e8] hover:bg-[#3fc1ff] text-white font-bold text-xs tracking-wider uppercase transition-all shadow-lg shadow-[#0b6fa8]/20 w-full sm:w-auto sm:self-start"
+              >
+                <span>Gọi ngay cho trụ sở</span>
                 <ArrowRight className="w-4 h-4" />
               </a>
             </div>

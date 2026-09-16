@@ -18,18 +18,18 @@ export const COMPANY_INFO = {
   support247: "1900 6868",
   email: "contact@dhgtransport.vn",
   quoteEmail: "baogia@dhgtransport.vn",
-  addressMain: "Tòa nhà DHG Logistics, Đường 356, Đình Vũ, TP. Hải Phòng",
+  addressMain: "77 Đường 66CL, Phường Cát Lái, Thành phố Hồ Chí Minh",
+  taxCode: "0319551121",
+  legalRepresentative: "Phạm Thị Thu Hiền",
+  businessField: "Vận tải hàng hóa bằng đường bộ",
   offices: [
-    { city: "Hải Phòng", address: "Khu Kinh tế Đình Vũ, Q. Hải An, TP. Hải Phòng", phone: "0225 3888 668" },
-    { city: "Hà Nội", address: "Tầng 8, Tòa tháp Diamond, Đường Phạm Hùng, Cầu Giấy, Hà Nội", phone: "024 3999 778" },
-    { city: "Đà Nẵng", address: "Số 45 Đường số 3, KCN Hòa Cầm, Cẩm Lệ, Đà Nẵng", phone: "0236 3777 556" },
-    { city: "TP. Hồ Chí Minh", address: "Cảng Cát Lái, Đường Nguyễn Thị Định, TP. Thủ Đức, TP. HCM", phone: "028 3666 990" },
+    { city: "TP. Hồ Chí Minh", address: "77 Đường 66CL, Phường Cát Lái, Thành phố Hồ Chí Minh", phone: "0979 255 602" },
   ],
   stats: [
     { value: "20+", label: "NĂM KINH NGHIỆM", sub: "Tiên phong ngành vận tải siêu trọng" },
     { value: "500+", label: "DỰ ÁN ĐÃ THỰC HIỆN", sub: "Dự án năng lượng, công nghiệp nặng" },
     { value: "100+", label: "THIẾT BỊ CHUYÊN DỤNG", sub: "Đầu kéo công suất lớn, rơ mooc thủy lực" },
-    { value: "63", label: "TỈNH THÀNH PHỤC VỤ", sub: "Mạng lưới kết nối xuyên suốt Bắc - Nam" },
+    { value: "63", label: "TỈNH THÀNH PHỤC VỤ", sub: "Điều phối phương tiện khắp cả nước" },
     { value: "0", label: "TAI NẠN LỚN", sub: "Cam kết chuẩn mực an toàn tuyệt đối" },
   ]
 };

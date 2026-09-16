@@ -106,7 +106,7 @@ export default function App() {
         {/* 12. Why Choose Us (PDF Section 12) */}
         <WhyChooseUsSection />
 
-        {/* Nationwide branch network */}
+        {/* Headquarters contact info */}
         <OfficeNetworkSection />
 
         {/* 13 & 14. Interactive Quotation Form & Cargo Spec Checker (PDF Section 13 & 14) */}

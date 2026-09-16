@@ -61,10 +61,10 @@ export function Footer({ onOpenQuote }: FooterProps) {
             </ul>
           </div>
 
-          {/* Col 3: Offices Nationwide */}
+          {/* Col 3: Office */}
           <div className="lg:col-span-5 space-y-4">
             <h4 className="text-xs font-bold text-slate-900 uppercase tracking-widest font-mono text-[#0b6fa8]">
-              MẠNG LƯỚI VĂN PHÒNG & BÃI XE TOÀN QUỐC
+              TRỤ SỞ CHÍNH
             </h4>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
@@ -72,7 +72,7 @@ export function Footer({ onOpenQuote }: FooterProps) {
                 <div key={idx} className="p-3 rounded-none bg-[#ebebf1] border border-[#dee1e7] space-y-1">
                   <div className="flex items-center gap-1.5 font-bold text-slate-900">
                     <MapPin className="w-3.5 h-3.5 text-[#0b6fa8]" />
-                    <span>Chi Nhánh {off.city}</span>
+                    <span>{off.city}</span>
                   </div>
                   <p className="text-[11px] text-slate-500 line-clamp-2">
                     {off.address}
@@ -108,8 +108,10 @@ export function Footer({ onOpenQuote }: FooterProps) {
 
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
-          <div>
-            © {new Date().getFullYear()} {COMPANY_INFO.legalNameShort}. Bản quyền thuộc về {COMPANY_INFO.legalName}.
+          <div className="space-y-1 text-center sm:text-left">
+            <p>
+              © {new Date().getFullYear()} {COMPANY_INFO.legalNameShort}.
+            </p>
           </div>
           <div className="flex items-center space-x-6 text-[11px]">
             <a href="#hero" className="hover:text-slate-900 transition-colors">Trang chủ</a>

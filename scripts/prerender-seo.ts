@@ -7,6 +7,32 @@ import { CONTENT_PAGES_SELECT, mapContentPageRow, type ContentPage } from '../sr
 const SITE_URL = 'https://dhgtransport.vn';
 const OUTPUT_DIR = process.env.PRERENDER_OUTPUT_DIR ?? 'dist';
 const ORGANIZATION = { '@type': 'Organization', name: 'DHG TRANSPORT', url: `${SITE_URL}/` };
+// Kept in sync manually with COMPANY_INFO in src/data/companyData.ts — that file imports
+// image assets that only Vite (not this plain Node script) knows how to resolve.
+const ORGANIZATION_SCHEMA = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'DHG TRANSPORT',
+  legalName: 'DHG TRANSPORT JOINT STOCK COMPANY',
+  alternateName: 'DHG TRANSPORT JSC',
+  url: `${SITE_URL}/`,
+  logo: `${SITE_URL}/favicon.svg`,
+  description: 'DHG Transport cung cấp giải pháp vận chuyển siêu trường siêu trọng trọn gói, an toàn, đúng tiến độ trên toàn quốc.',
+  telephone: '+84798600600',
+  email: 'contact@dhgtransport.vn',
+  taxID: '0319551121',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '77 Đường 66CL, Phường Cát Lái',
+    addressLocality: 'Thành phố Hồ Chí Minh',
+    addressCountry: 'VN',
+  },
+  employee: {
+    '@type': 'Person',
+    name: 'Phạm Thị Thu Hiền',
+    jobTitle: 'Người đại diện theo pháp luật',
+  },
+};
 
 const supabaseUrl = process.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY;
@@ -79,7 +105,7 @@ function indexRoute(path: '/dich-vu' | '/kien-thuc', heading: string, pages: Con
 
 const projectDescription = 'Dự án tiêu biểu được DHG Transport công bố và cập nhật từ hệ thống quản lý dự án.';
 const routes: Route[] = [
-  { path: '/', title: 'DHG Transport | Vận chuyển hàng siêu trường siêu trọng', description: 'DHG Transport cung cấp giải pháp vận chuyển hàng siêu trường siêu trọng, hàng quá khổ quá tải, máy móc công nghiệp và thiết bị dự án tại Việt Nam.', body: layout('<article><h1>DHG Transport</h1><p>Giải pháp vận chuyển hàng siêu trường siêu trọng, hàng quá khổ quá tải, máy móc công nghiệp và thiết bị dự án.</p><p><a href="/dich-vu">Khám phá dịch vụ vận chuyển</a> hoặc <a href="/#contact">yêu cầu tư vấn và báo giá</a>.</p></article>'), schema: [{ '@context': 'https://schema.org', '@type': 'Organization', name: 'DHG TRANSPORT', url: `${SITE_URL}/` }, { '@context': 'https://schema.org', '@type': 'WebSite', name: 'DHG TRANSPORT', url: `${SITE_URL}/`, inLanguage: 'vi-VN' }, webPage('DHG Transport', 'Giải pháp vận chuyển hàng siêu trường siêu trọng, hàng quá khổ quá tải, máy móc công nghiệp và thiết bị dự án tại Việt Nam.', '/')] },
+  { path: '/', title: 'DHG Transport | Vận chuyển hàng siêu trường siêu trọng', description: 'DHG Transport cung cấp giải pháp vận chuyển hàng siêu trường siêu trọng, hàng quá khổ quá tải, máy móc công nghiệp và thiết bị dự án tại Việt Nam.', body: layout('<article><h1>DHG Transport</h1><p>Giải pháp vận chuyển hàng siêu trường siêu trọng, hàng quá khổ quá tải, máy móc công nghiệp và thiết bị dự án.</p><p><a href="/dich-vu">Khám phá dịch vụ vận chuyển</a> hoặc <a href="/#contact">yêu cầu tư vấn và báo giá</a>.</p></article>'), schema: [ORGANIZATION_SCHEMA, { '@context': 'https://schema.org', '@type': 'WebSite', name: 'DHG TRANSPORT', url: `${SITE_URL}/`, inLanguage: 'vi-VN' }, webPage('DHG Transport', 'Giải pháp vận chuyển hàng siêu trường siêu trọng, hàng quá khổ quá tải, máy móc công nghiệp và thiết bị dự án tại Việt Nam.', '/')] },
   indexRoute('/dich-vu', 'Dịch vụ vận chuyển', SERVICE_PAGES),
   indexRoute('/kien-thuc', 'Kiến thức vận chuyển', KNOWLEDGE_PAGES),
   ...SERVICE_PAGES.map((page) => detailRoute(page, 'service')),

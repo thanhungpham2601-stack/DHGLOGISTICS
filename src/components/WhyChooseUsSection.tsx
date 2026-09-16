@@ -40,7 +40,7 @@ export function WhyChooseUsSection() {
           <Reveal className="lg:col-span-6">
             <div className="space-y-6">
               <p className="text-sm sm:text-base text-slate-700 leading-relaxed">
-                Hơn hai thập kỷ vận chuyển hàng siêu trường, siêu trọng cho các công trình năng lượng, công nghiệp nặng và hạ tầng trọng điểm quốc gia. DHG kết hợp đội xe chuyên dụng, quy trình khảo sát kỹ thuật chặt chẽ và mạng lưới chi nhánh xuyên suốt Bắc – Trung – Nam để đưa mọi lô hàng về đích an toàn.
+                Hơn hai thập kỷ vận chuyển hàng siêu trường, siêu trọng cho các công trình năng lượng, công nghiệp nặng và hạ tầng trọng điểm quốc gia. DHG kết hợp đội xe chuyên dụng, quy trình khảo sát kỹ thuật chặt chẽ và năng lực điều phối phương tiện xuyên suốt Bắc – Trung – Nam để đưa mọi lô hàng về đích an toàn.
               </p>
 
               <div className="grid grid-cols-2 gap-4">
